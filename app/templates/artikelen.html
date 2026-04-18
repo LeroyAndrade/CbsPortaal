@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Artikelen</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .article {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <a href="main.html">← Terug naar home</a>
+k
+
+<!--    <section class="Artikelen">-->
+<!--         <div class="ArtikelenChild">-->
+<!--            <p>Lorem Ipsum</p>-->
+
+<!--            <img src="https://cdn.cbs.nl/images/326537656f48624c76617576556378367647645178413d3d/900x450.jpg" alt="Afbeelding">-->
+<!--         </div>-->
+
+<!--    </section>-->
+
+    <section class="Artikelen">
+         {% for article in articles %}
+          <div class="ArtikelenChild">
+              <p>{{ article.Title }}</p>
+
+            <img src="{{ article.Image }}">
+          </div>
+        {% endfor %}
+    </section>
+</body>
+</html>

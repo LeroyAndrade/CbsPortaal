@@ -14,7 +14,7 @@ FROM python:3.14
 
 WORKDIR /app
 
-# Dynamische manier (werkt beter op verschillende architecturen)
+# Dynamische manier (werkt beter op verschillende machines)
 COPY --from=builder /usr/local /usr/local
 
 # Kopieer alleen de applicatie code

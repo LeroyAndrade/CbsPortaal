@@ -1,0 +1,35 @@
+*{
+    margin:0 auto;
+}
+
+body{
+    background-color:#F1F1F1;
+    width: 99vw;
+}
+
+.Artikelen{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 99vw;
+}
+
+.ArtikelenChild{
+    width: 33vw;
+    margin-bottom: 1em;
+}
+.ArtikelenChild, img{
+    width: 30%;
+    object-fit: contain;
+}
+
+@media only screen and (min-width: 700px) {
+    body{
+        background-color:green;
+    }
+
+    .Artikelen{
+        flex-direction: row;
+    }
+
+}

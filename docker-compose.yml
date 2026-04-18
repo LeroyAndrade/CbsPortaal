@@ -35,15 +35,17 @@ services:
     environment:
       FLASK_ENV: ${FLASK_ENV:-development}
       FLASK_DEBUG: ${FLASK_DEBUG:-1}
+      SECRET_KEY: ${SECRET_KEY}
     volumes:
       - .:/app
     ports:
-      - "5000:5000"
+      - "5001:5000"
     depends_on:
       db:
         condition: service_healthy
     networks:
       - cbs_network
+
 
 volumes:
   postgres_data:
