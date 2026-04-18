@@ -1,0 +1,49 @@
+version: '3.8'
+
+networks:
+  cbs_network:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: cbs_portal_db
+    restart: always
+    environment:
+      POSTGRES_DB: cbs_portal
+      POSTGRES_USER: cbs
+      POSTGRES_PASSWORD: cbs2026sbc
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5433"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cbs -d cbs_portal"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    networks:
+      - cbs_network
+
+  app:
+    build: .
+    container_name: cbs_portal_app
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      FLASK_ENV: ${FLASK_ENV:-development}
+      FLASK_DEBUG: ${FLASK_DEBUG:-1}
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - cbs_network
+
+volumes:
+  postgres_data:

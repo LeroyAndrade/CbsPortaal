@@ -1,0 +1,30 @@
+docker-compose up --build -d
+
+# First time - eenmalig
+docker-compose up --build -d
+docker-compose exec app flask db init
+docker-compose exec app flask db migrate -m "initial migration"
+docker-compose exec app flask db upgrade
+
+
+
+# herstart
+docker-compose restart app
+
+
+# tijdens code:
+
+# Migratie:
+docker-compose exec app flask db migrate -m "jouw beschrijving"
+docker-compose exec app flask db upgrade
+docker-compose restart app
+
+
+#Meeste gevallen 
+ docker-compose restart app
+
+# Requirements of Dockerfile aangepast 
+ docker-compose build --no-cache && docker-compose up -d
+
+# Echt problemen
+ docker-compose down -v
