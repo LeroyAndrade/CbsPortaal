@@ -5,7 +5,7 @@ main = Blueprint('main', __name__)
 
 @main.route("/getArticles")
 def getArticles():
-    # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&select=Body"
+    # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
     url = "https://www.cbs.nl/odata/v1/Articles?$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image"
     r = requests.get(url)

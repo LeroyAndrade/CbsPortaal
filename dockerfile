@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 # Runtime stage
 # FROM python:3.14-slim
-FROM python:3.14
+FROM python:3.14-slim
 
 WORKDIR /app
 
