@@ -1,30 +1,63 @@
-docker-compose up --build -d
+# =========================
+# 🚀 FIRST TIME SETUP
+# =========================
 
-# First time - eenmalig
-docker-compose up --build -d
-docker-compose exec app flask db init
-docker-compose exec app flask db migrate -m "initial migration"
-docker-compose exec app flask db upgrade
+docker compose up --build -d
 
-
-
-# herstart
-docker-compose restart app
+# Flask migrations (eerste keer)
+docker compose exec app flask db init
+docker compose exec app flask db migrate -m "initial migration"
+docker compose exec app flask db upgrade
 
 
-# tijdens code:
+# =========================
+# NORMAAL STARTEN
+# =========================
 
-# Migratie:
-docker-compose exec app flask db migrate -m "jouw beschrijving"
-docker-compose exec app flask db upgrade
-docker-compose restart app
+docker compose up -d
 
 
-#Meeste gevallen 
- docker-compose restart app
+# =========================
+# HERSTART APP (meest gebruikt)
+# =========================
 
-# Requirements of Dockerfile aangepast 
- docker-compose build --no-cache && docker-compose up -d
+docker compose restart app
 
-# Echt problemen
- docker-compose down -v
+
+# =========================
+# MIGRATIES (tijdens development)
+# =========================
+
+docker compose exec app flask db migrate -m "jouw beschrijving"
+docker compose exec app flask db upgrade
+docker compose restart app
+
+
+# =========================
+# REBUILD (Dockerfile / requirements aangepast)
+# =========================
+
+docker compose build --no-cache
+docker compose up -d
+
+
+# =========================
+# FULL RESET (alles opnieuw, data weg!)
+# =========================
+
+docker compose down -v
+docker compose up --build -d
+
+
+# =========================
+# LOGS CHECKEN
+# =========================
+
+docker compose logs -f app
+
+
+# =========================
+# STOP PROJECT
+# =========================
+
+docker compose down

@@ -49,3 +49,21 @@ class Category(db.Model):
     name = db.Column(db.String(100), unique=True, nullable=False, index=True)
 
 
+# Koppeltabel (many-to-many)
+class ArticleCategory(db.Model):
+    __tablename__ = 'article_categories'
+
+    article_id = db.Column(db.String(100), db.ForeignKey('articles.unique_id', ondelete='CASCADE'), primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='CASCADE'), primary_key=True)
+    
+
+# RunLog tabel
+class RunLog(db.Model):
+    __tablename__ = 'run_logs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    dataset_name = db.Column(db.String(100), index=True)
+    records_count = db.Column(db.Integer)
+    duration_seconds = db.Column(db.Float)
+    status = db.Column(db.String(20), index=True)

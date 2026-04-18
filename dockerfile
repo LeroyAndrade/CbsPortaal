@@ -27,4 +27,4 @@ USER appuser
 
 EXPOSE 5000
 
-CMD ["python", "run.py"]
+CMD ["python", "main.py"]
