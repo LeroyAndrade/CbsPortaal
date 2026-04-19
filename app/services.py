@@ -1,11 +1,16 @@
 import requests
 
-CBS_URL = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime desc"
+class ArticleService:
 
+    @staticmethod
+    def get_latest_cbs_article():
+        url = "https://www.cbs.nl/odata/v1/Articles?$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image"
 
-def get_latest_cbs_article():
-    response = requests.get(CBS_URL)
-    response.raise_for_status()
-
-    data = response.json()
-    return data["value"][0]["Body"]
+        try:
+            r = requests.get(url)
+            data = r.json()
+            body_text = data["value"]
+            return body_text
+        except Exception as e:
+            print(f"Artikelen fetchen error: \n{e}")
+            return []

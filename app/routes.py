@@ -1,20 +1,19 @@
 import requests
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 
+from app.services import ArticleService
+
 main = Blueprint('main', __name__)
 
 @main.route("/")
 def index():
-    return "hoofd pagina werkt"
+    return "hoofd pagina werkt."
 
 @main.route("/getArticles")
 def getArticles():
     # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
-    url = "https://www.cbs.nl/odata/v1/Articles?$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image"
-    r = requests.get(url)
-    data = r.json()
-    body_text = data["value"]
+    body_text = ArticleService.get_latest_cbs_article()
     return render_template('artikelen.html', articles=body_text)
 
     # return data

@@ -1,20 +1,28 @@
-<!-- app/templates/artikelen.html -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <title>Artikelen</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .article {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <a href="{{ url_for('main.index') }}">← Terug naar home</a>
+    <a href="main.html">← Terug naar home</a>
 
     <section class="Artikelen">
          {% for article in articles %}
           <div class="ArtikelenChild">
-              <p>{{ article.title }}</p>
-              {% if article.url %}
-                <img src="{{ article.url }}" alt="">
-              {% endif %}
+              <p>{{ article.Title }}</p>
+            <img src="{{ article.Image }}">
           </div>
         {% endfor %}
     </section>
