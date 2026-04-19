@@ -1,11 +1,14 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from config import Config
+# from flask import Flask
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_migrate import Migrate
+# from app import create_app
+#
+# db = SQLAlchemy()
+# migrate = Migrate()
+#
+# app = create_app()
 
-db = SQLAlchemy()
-migrate = Migrate()
-# import logging
+# main.py
 from app import create_app
 
 app = create_app()

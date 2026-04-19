@@ -1,7 +1,11 @@
 import requests
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 
 main = Blueprint('main', __name__)
+
+@main.route("/")
+def index():
+    return "hoofd pagina werkt"
 
 @main.route("/getArticles")
 def getArticles():
@@ -15,6 +19,25 @@ def getArticles():
 
     # return data
 
-@main.route("/")
-def getMainPage():
-    return "hoofd pagina werkt"
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # tijdelijke check, to do (later vervangen door echte db check)
+        if username == "admin" and password == "admin123":
+            session['user'] = username
+            flash('Je bent ingelogd', 'success')
+            return redirect(url_for('main.index'))
+        else:
+            flash('Verkeerde login', 'error')
+
+    return render_template('login.html')
+
+
+@main.route('/logout')
+def logout():
+    session.pop('user', None)
+    flash('Je bent uitgelogd', 'success')
+    return redirect(url_for('main.index'))

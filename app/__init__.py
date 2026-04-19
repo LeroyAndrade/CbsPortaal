@@ -1,10 +1,10 @@
+# app/__init__.py
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-# db vanuit 1 centrale plek
-# from app.extensions import db, migrate
 from config import Config
 
+# Centrale db en migrate
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -15,11 +15,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # Routes importeren
-    from app.routes import main
+    # Blueprint importeren en registreren
+    from .routes import main
     app.register_blueprint(main)
 
     return app
-
-
-
