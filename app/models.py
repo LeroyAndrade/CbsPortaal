@@ -8,7 +8,6 @@ from app.extensions import db
 
 # dan je classes: Article, Category, ArticleCategory, RunLog, LoginAttempts
 
-db = SQLAlchemy()
 # User tabel
 class User(db.Model, UserMixin):
     __tablename__ = 'users'

@@ -8,7 +8,8 @@ docker compose up --build -d
 docker compose exec app flask db init
 docker compose exec app flask db migrate -m "initial migration"
 docker compose exec app flask db upgrade
-
+== werkt 't'
+docker compose exec db psql -U cbs -d cbs_portal -c "\dt"
 
 # =========================
 # NORMAAL STARTEN
