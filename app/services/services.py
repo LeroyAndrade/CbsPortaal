@@ -1,7 +1,7 @@
 import requests
 
 class ArticleService:
-
+    
     @staticmethod
     def get_latest_cbs_article():
         url = "https://www.cbs.nl/odata/v1/Articles?$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image"
