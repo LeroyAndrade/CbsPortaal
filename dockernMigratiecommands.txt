@@ -2,7 +2,7 @@
 # 🚀 FIRST TIME SETUP
 # =========================
 
-python3.14 -m venv env
+python3.14 -m venv macenv
 source env/bin/activate
 
 docker compose up --build -d
@@ -69,3 +69,13 @@ docker compose logs -f app
 # =========================
 
 docker compose down
+
+# Op Mac M chip na upgrade
+> deactivate
+> rm -rf macenv
+> /Library/Frameworks/Python.framework/Versions/3.14/bin/python3.14 -m venv macenv
+> source macenv/bin/activate
+> python --version
+
+# Terminate proces
+> sudo kill -9 $(lsof -t -i:5002)

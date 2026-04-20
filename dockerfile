@@ -1,6 +1,6 @@
 # Build stage
 # FROM python:3.14-slim AS builder
-FROM python:3.14 AS builder
+FROM python:3.14-slimpip install -r requirements.txt --force-reinstall AS builder
 WORKDIR /app
 
 COPY requirements.txt .
@@ -25,6 +25,6 @@ RUN useradd -m -u 1000 appuser && \
 
 USER appuser
 
-EXPOSE 5000
+EXPOSE 5002
 
 CMD ["python", "main.py"]
