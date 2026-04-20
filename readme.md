@@ -14,6 +14,5 @@
 > docker compose down
 
 
-
 # Run once:
 > docker compose exec app python run_once.py

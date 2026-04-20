@@ -2,6 +2,9 @@
 # 🚀 FIRST TIME SETUP
 # =========================
 
+python3.14 -m venv env
+source env/bin/activate
+
 docker compose up --build -d
 
 # Flask migrations (eerste keer)
