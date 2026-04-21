@@ -75,3 +75,6 @@ pip install -r requirements.txt
 # =========================
 
 sudo kill -9 $(lsof -t -i:5002) 2>/dev/null || echo "Geen proces op poort 5002"
+
+# MySQL
+> docker exec -it cbs_portal_db psql -U cbs -d cbs_portal

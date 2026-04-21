@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <a href="main.html">← Terug naar home</a>
+    <a href="{{ url_for('cbs./') }}">← Terug naar home</a>
 
     <section class="Artikelen">
          {% for article in articles %}
