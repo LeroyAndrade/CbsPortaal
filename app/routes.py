@@ -4,7 +4,6 @@ from app.services.services import ArticleService
 
 # Login
 from app.models.user import User
-
 # DB
 from app.extensions.db import db
 from flask_login import login_user
@@ -37,7 +36,7 @@ def login():
                 session['logged_in'] = True
                 session['user'] = username
                 login_user(user)
-                return redirect(url_for('bp.index'))
+                return redirect(url_for('cbs.index'))
             else:
                 flash('Login niet succesvol', 'error')
         else:
@@ -62,11 +61,11 @@ def register():
             db.session.commit()
 
             flash('Account aangemaakt, je kunt nu inloggen', 'success')
-            return redirect(url_for('bp.login'))
+            return redirect(url_for('cbs.login'))
 
     return render_template('register.html')
 @bp.route('/logout')
 def logout():
     session.pop('user', None)
     flash('Je bent uitgelogd', 'success')
-    return redirect(url_for('main.index'))
+    return redirect(url_for('cbs.index'))

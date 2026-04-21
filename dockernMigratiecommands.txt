@@ -66,6 +66,18 @@ docker compose logs -f app
 # Docker desktop login bug:
 > rm -rf ~/.docker
 
+Path plots niet bekend op Macbook na sluimerstand
+>> export PATH="/usr/local/bin:$PATH"
+>> docker --version
+>> Docker version 29.1.3, build f52814d
+>> echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+>> source ~/.zshrc
+>> sluit alle terminal en open nieuwe.
+
+
+
+
+
 # =========================
 # STOP PROJECT
 # =========================

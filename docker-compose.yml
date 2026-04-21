@@ -34,7 +34,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "5002:5000"
+      - "5002:5002"
     depends_on:
       db:
         condition: service_healthy
