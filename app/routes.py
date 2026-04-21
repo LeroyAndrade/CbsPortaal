@@ -4,6 +4,9 @@ from app.services.services import ArticleService
 
 # Login
 from app.models.user import User
+
+# DB
+from app.extensions.db import db
 from flask_login import login_user
 
 bp = Blueprint('cbs', __name__)
@@ -24,8 +27,8 @@ def getArticles():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form.get('username', '').strip()
+        password = request.form.get('password', '').strip()
 
         user = User.query.filter_by(username=username).first()
 
@@ -42,7 +45,26 @@ def login():
 
     return render_template('login.html')
 
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username', '').strip()
+        email    = request.form.get('email',    '').strip()
+        password = request.form.get('password', '').strip()
 
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            flash('Gebruikersnaam bestaat al', 'error')
+        else:
+            new_user = User(username=username, email=email, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+
+            flash('Account aangemaakt, je kunt nu inloggen', 'success')
+            return redirect(url_for('bp.login'))
+
+    return render_template('register.html')
 @bp.route('/logout')
 def logout():
     session.pop('user', None)
