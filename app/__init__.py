@@ -1,7 +1,7 @@
-# app/__init__.py
+# app/extensions.py
 from flask import Flask
 from config import Config
-from app.extensions import db, migrate
+from app.extensions import db, migrate, login_manager
 
 def create_app():
     app = Flask(__name__)
@@ -10,7 +10,7 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from .routes import main
-    app.register_blueprint(main)
+    from .routes import bp
+    app.register_blueprint(bp)
 
     return app

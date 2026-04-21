@@ -1,15 +1,18 @@
 import requests
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
-
 from app.services.services import ArticleService
 
-main = Blueprint('main', __name__)
+# Login
+from app.models.user import User
+from flask_login import login_user
 
-@main.route("/")
+bp = Blueprint('cbs', __name__)
+
+@bp.route("/")
 def index():
     return "hoofd pagina werkt."
 
-@main.route("/getArticles")
+@bp.route("/getArticles")
 def getArticles():
     # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
@@ -18,24 +21,29 @@ def getArticles():
 
     # return data
 
-@main.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # tijdelijke check, to do (later vervangen door echte db check)
-        if username == "admin" and password == "admin123":
-            session['user'] = username
-            flash('Je bent ingelogd', 'success')
-            return redirect(url_for('main.index'))
+        user = User.query.filter_by(username=username).first()
+
+        if user:
+            if user.check_password(password):
+                session['logged_in'] = True
+                session['user'] = username
+                login_user(user)
+                return redirect(url_for('bp.index'))
+            else:
+                flash('Login niet succesvol', 'error')
         else:
-            flash('Verkeerde login', 'error')
+            flash('Login niet succesvol', 'error')
 
     return render_template('login.html')
 
 
-@main.route('/logout')
+@bp.route('/logout')
 def logout():
     session.pop('user', None)
     flash('Je bent uitgelogd', 'success')
