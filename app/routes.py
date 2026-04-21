@@ -1,9 +1,12 @@
 import requests
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for, logout_user
 from app.services.services import ArticleService
+from sqlalchemy.sql.functions import current_user
 
 # Login
 from app.models.user import User
+from flask_login import login_required
+
 # DB
 from app.extensions.db import db
 from flask_login import login_user
@@ -15,6 +18,7 @@ def index():
     return "hoofd pagina werkt."
 
 @bp.route("/getArticles")
+@login_required
 def getArticles():
     # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
@@ -31,12 +35,16 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
+        # als je al bent ingelogd ga naar homepagina
+        if current_user.is_authenticated:
+            return redirect(url_for('cbs.index'))
+
         if user:
             if user.check_password(password):
                 session['logged_in'] = True
                 session['user'] = username
                 login_user(user)
-                return redirect(url_for('cbs.index'))
+                return redirect(url_for('artikelen.html'))
             else:
                 flash('Login niet succesvol', 'error')
         else:
@@ -66,6 +74,8 @@ def register():
     return render_template('register.html')
 @bp.route('/logout')
 def logout():
+    session['logged_in'] = False
+    logout_user()
     session.pop('user', None)
-    flash('Je bent uitgelogd', 'success')
-    return redirect(url_for('cbs.index'))
+    flash('U bent uitgelogd', 'success')
+    return redirect(url_for('/'))
