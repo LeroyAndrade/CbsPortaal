@@ -67,6 +67,7 @@ docker compose logs -f app
 > rm -rf ~/.docker
 
 Path plots niet bekend op Macbook na sluimerstand
+>> Docker
 >> export PATH="/usr/local/bin:$PATH"
 >> docker --version
 >> Docker version 29.1.3, build f52814d
@@ -74,8 +75,14 @@ Path plots niet bekend op Macbook na sluimerstand
 >> source ~/.zshrc
 >> sluit alle terminal en open nieuwe.
 
-
-
+# Niets meer kunnen runnen (play)
+> deactivate 2>/dev/null || true
+> rm -rf macenv
+> python3.14 -m venv macenv
+> source macenv/bin/activate
+> python -m pip install --upgrade pip
+> pip install -r requirements.txt
+> python main.py
 
 
 # =========================

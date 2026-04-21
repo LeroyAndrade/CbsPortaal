@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from flask_migrate import Config
 
 load_dotenv()
 
@@ -9,3 +10,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_ENGINE_OPTIONS = {}
+
