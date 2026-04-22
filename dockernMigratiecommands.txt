@@ -41,8 +41,8 @@ docker compose restart app
 # REBUILD (Dockerfile / requirements aangepast)
 # =========================
 
-docker compose build --no-cache
-docker compose up -d
+docker compose build
+docker compose up --no-cache
 
 
 # =========================
@@ -100,3 +100,10 @@ docker compose down
 
 # Terminate proces
 > sudo kill -9 $(lsof -t -i:5002)
+
+
+# Migraties forceer legen
+> docker compose down -v
+> docker volume rm cbsportaal_postgres_data -f
+> docker compose up --build app
+> docker compose exec app flask db upgrade

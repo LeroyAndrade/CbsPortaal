@@ -1,3 +1,5 @@
+# flask create-admin
+
 import secrets
 import string
 from app import create_app

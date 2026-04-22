@@ -7,7 +7,7 @@
       <excludeFolder url="file://$MODULE_DIR$/macvenvpython" />
       <excludeFolder url="file://$MODULE_DIR$/macvenvpython" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.14 virtualenv at ~/Documents/code/cbsPortaal/CbsPortaal/macenv" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.14 (cbsPortaal)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

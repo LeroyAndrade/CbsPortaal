@@ -1,0 +1,3 @@
+- Gehele project als nieuw pushen
+  - met .gitignoreProductie hernoemen naar .gitignore
+  - add, commit en push all

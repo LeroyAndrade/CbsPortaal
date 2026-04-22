@@ -1,15 +1,13 @@
-import requests
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for, logout_user
+# Flask imports
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+
+# Flask-Login imports
+from flask_login import logout_user, login_user, login_required, current_user
+
+# Eigen imports
 from app.services.services import ArticleService
-from sqlalchemy.sql.functions import current_user
-
-# Login
 from app.models.user import User
-from flask_login import login_required
-
-# DB
 from app.extensions.db import db
-from flask_login import login_user
 
 bp = Blueprint('cbs', __name__)
 

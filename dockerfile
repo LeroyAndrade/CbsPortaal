@@ -1,6 +1,10 @@
 # Dockerfile
 
-FROM python:3.14-slim
+# Mac
+# FROM python:3.14-slim
+
+# Linux
+FROM python:3.14
 
 WORKDIR /app
 
