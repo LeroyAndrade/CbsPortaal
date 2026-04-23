@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="rgZ1Gd7nBcift2DahSf6">
+    <mxGraphModel dx="975" dy="632" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="767" width="767" x="23" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-6" parent="1" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="120" width="317.5" x="62.5" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;p align=&quot;justify&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod &lt;br&gt;tempor incididunt ut labore et dolore magna aliqua.&amp;nbsp;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&amp;nbsp;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="320" x="60" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;h1 style=&quot;--fontSize: 86; line-height: 1;&quot; data-fontsize=&quot;86&quot; data-lineheight=&quot;86px&quot; class=&quot;fusion-responsive-typography-calculated&quot;&gt;Lorem Ipsum&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="30" width="175" x="120" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-14" parent="1" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="120" width="317.5" x="427.5" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-15" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;" value="&lt;p align=&quot;justify&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod &lt;br&gt;tempor incididunt ut labore et dolore magna aliqua.&amp;nbsp;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.&amp;nbsp;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;br&gt;&lt;/p&gt;" vertex="1">
+          <mxGeometry height="110" width="320" x="425" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;h1 style=&quot;--fontSize: 86; line-height: 1;&quot; data-fontsize=&quot;86&quot; data-lineheight=&quot;86px&quot; class=&quot;fusion-responsive-typography-calculated&quot;&gt;Lorem Ipsum&lt;/h1&gt;" vertex="1">
+          <mxGeometry height="30" width="175" x="485" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Thema: bevolking" vertex="1">
+          <mxGeometry height="30" width="175" x="23" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Thema: trade" vertex="1">
+          <mxGeometry height="30" width="175" x="375" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Tags:&amp;nbsp;&lt;span&gt;&lt;span class=&quot;objectBox objectBox-array&quot; title=&quot;Array&quot;&gt;&lt;span&gt;&lt;span class=&quot;objectBox objectBox-string&quot;&gt;gezinshereniging&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="175" x="38" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="sZSRGZfl-Fp-ewoIv3A4-20" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Tags: asielzoekers" vertex="1">
+          <mxGeometry height="30" width="175" x="390" y="460" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

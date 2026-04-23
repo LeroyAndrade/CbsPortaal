@@ -5,6 +5,7 @@
 body{
     background-color:#F1F1F1;
     width: 99vw;
+    margin:0 1em;
 }
 
 .Artikelen{
@@ -15,11 +16,12 @@ body{
 }
 
 .ArtikelenChild{
-    width: 33vw;
+    width: 100%;
+    max-width: 30vw;
     margin-bottom: 1em;
 }
-.ArtikelenChild, img{
-    width: 30%;
+.ArtikelenChild > img{
+    width: inherit;
     object-fit: contain;
 }
 

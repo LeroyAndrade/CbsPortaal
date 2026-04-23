@@ -13,7 +13,7 @@ bp = Blueprint('cbs', __name__)
 
 @bp.route("/")
 def index():
-    return "hoofd pagina werkt."
+    return redirect(url_for('cbs.getArticles'))
 
 @bp.route("/getArticles")
 @login_required
@@ -33,7 +33,7 @@ def login():
 
         user = User.query.filter_by(username=username).first()
 
-        # als je al bent ingelogd ga naar homepagina
+        # als je al bent ingelogd en opnieuw inlogt via het formulier, ga naar homepagina
         if current_user.is_authenticated:
             return redirect(url_for('cbs.index'))
 
@@ -42,11 +42,15 @@ def login():
                 session['logged_in'] = True
                 session['user'] = username
                 login_user(user)
-                return redirect(url_for('artikelen.html'))
+                return redirect(url_for('cbs.getArticles'))
             else:
                 flash('Login niet succesvol', 'error')
         else:
             flash('Login niet succesvol', 'error')
+
+        # als je al bent ingelogd en willekeurig naar de pagina toe gaat
+        if current_user.is_authenticated:
+            return redirect(url_for('cbs.index'))
 
     return render_template('login.html')
 
@@ -72,8 +76,10 @@ def register():
     return render_template('register.html')
 @bp.route('/logout')
 def logout():
-    session['logged_in'] = False
+    session['_user_id'] = False
+    # session['logged_in'] = False
+    # session['user'] = False
     logout_user()
     session.pop('user', None)
     flash('U bent uitgelogd', 'success')
-    return redirect(url_for('/'))
+    return redirect(url_for('cbs.index'))

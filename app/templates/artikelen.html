@@ -16,15 +16,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <a href="{{ url_for('cbs./') }}">← Terug naar home</a>
+   <p><a href="{{ url_for('cbs.index') }}">← Terug naar home</a></p>
+   <p> <a href="{{ url_for('cbs.logout') }}">← Log uit</a></p>
 
-    <section class="Artikelen">
+
+
+       <section class="Artikelen">
          {% for article in articles %}
           <div class="ArtikelenChild">
-              <p>{{ article.Title }}</p>
-            <img src="{{ article.Image }}">
+              <p>Titel van artikel</p><br>
+              <p>
+                  {{ article.LeadText }}
+              </p>
+              <br>
+            <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
+               <p>Taxonomy: {{article.TaxonomyTags}}</p>
+              <p>Themes: {{article.Themes}}</p>
           </div>
-        {% endfor %}
+         {% endfor %}
     </section>
+
+
+
+<!--    <section class="Artikelen">-->
+<!--         {% for article in articles %}-->
+<!--          <div class="ArtikelenChild">-->
+<!--              <p>{{ article.Title }}</p>-->
+<!--            <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">-->
+<!--          </div>-->
+<!--         {% endfor %}-->
+<!--    </section>-->
 </body>
 </html>
