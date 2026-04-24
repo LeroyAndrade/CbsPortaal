@@ -57,7 +57,7 @@ def login():
 
     return render_template('login.html')
 
-bp.route('/test')
+@bp.route('/test')
 def test():
     return render_template('test.html')
 

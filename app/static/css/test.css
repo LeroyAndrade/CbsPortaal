@@ -1,10 +1,23 @@
+body{
+    width: 99vw;
+}
+
 .Parent{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
+    width: 99vw;
+    gap: 10px;
 }
 
 .Parent div .child{
     padding: 1em;
     background-color: green;
+}
+
+.child{
+    padding: 30px;
+    background-color: green;
+    flex: 1 0 33vw;
 }
