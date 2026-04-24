@@ -107,3 +107,8 @@ docker compose down
 > docker volume rm cbsportaal_postgres_data -f
 > docker compose up --build app
 > docker compose exec app flask db upgrade
+
+# Forceer online Github en verwijder lokaal
+> git fetch origin
+> git reset --hard origin/main
+> git clean -fd

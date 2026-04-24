@@ -1,0 +1,10 @@
+.Parent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Parent div .child{
+    padding: 1em;
+    background-color: green;
+}

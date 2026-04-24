@@ -1,6 +1,6 @@
 # Flask imports
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
-
+import logging
 # Flask-Login imports
 from flask_login import logout_user, login_user, login_required, current_user
 
@@ -13,14 +13,17 @@ bp = Blueprint('cbs', __name__)
 
 @bp.route("/")
 def index():
-    return redirect(url_for('cbs.getArticles'))
+    return redirect(url_for('cbs.articles'))
 
-@bp.route("/getArticles")
-@login_required
-def getArticles():
+@bp.route("/articles")
+# @login_required
+def articles():
     # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
     body_text = ArticleService.get_latest_cbs_article()
+# debug here
+    logging.debug(body_text)
+
     return render_template('artikelen.html', articles=body_text)
 
     # return data
@@ -42,7 +45,7 @@ def login():
                 session['logged_in'] = True
                 session['user'] = username
                 login_user(user)
-                return redirect(url_for('cbs.getArticles'))
+                return redirect(url_for('cbs.articles'))
             else:
                 flash('Login niet succesvol', 'error')
         else:
@@ -53,6 +56,10 @@ def login():
             return redirect(url_for('cbs.index'))
 
     return render_template('login.html')
+
+bp.route('/test')
+def test():
+    return render_template('test.html')
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -82,4 +89,4 @@ def logout():
     logout_user()
     session.pop('user', None)
     flash('U bent uitgelogd', 'success')
-    return redirect(url_for('cbs.index'))
+    return redirect(url_for('cbs.login'))

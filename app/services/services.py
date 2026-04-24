@@ -4,7 +4,7 @@ class ArticleService:
     
     @staticmethod
     def get_latest_cbs_article():
-        url = "https://www.cbs.nl/odata/v1/Articles?$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
+        url = "https://www.cbs.nl/odata/v1/Articles?$top=5&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
 
         try:
             r = requests.get(url)

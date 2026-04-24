@@ -19,23 +19,26 @@
    <p><a href="{{ url_for('cbs.index') }}">← Terug naar home</a></p>
    <p> <a href="{{ url_for('cbs.logout') }}">← Log uit</a></p>
 
+    <main>
+  {% for article in articles %}
+        <div class="sectorA">
+           <section class="Artikelen">
 
+              <div class="ArtikelenChild">
+                  <p class="ArtikelTitel">{{ article.Title }}</p>
+                      <p class="ArtikelLeadText">
+                          {{ article.LeadText }}
+                      </p>
+                  <br>
+                <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
+                   <p>Taxonomy: {{article.TaxonomyTags}}</p>
+                  <p>Themes: {{article.Themes}}</p>
+              </div>
+           </section>
+        </div>
+      {% endfor %}
 
-       <section class="Artikelen">
-         {% for article in articles %}
-          <div class="ArtikelenChild">
-              <p>Titel van artikel</p><br>
-              <p>
-                  {{ article.LeadText }}
-              </p>
-              <br>
-            <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
-               <p>Taxonomy: {{article.TaxonomyTags}}</p>
-              <p>Themes: {{article.Themes}}</p>
-          </div>
-         {% endfor %}
-    </section>
-
+    </main>
 
 
 <!--    <section class="Artikelen">-->
