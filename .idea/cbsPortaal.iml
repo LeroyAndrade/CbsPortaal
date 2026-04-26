@@ -3,12 +3,13 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/macvenvpython" />
       <excludeFolder url="file://$MODULE_DIR$/macvenvpython" />
       <excludeFolder url="file://$MODULE_DIR$/macenv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.14 (cbsPortaal)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.14 virtualenv at ~/Documents/code/cbsPortaal/CbsPortaal/macenv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

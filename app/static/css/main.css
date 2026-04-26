@@ -19,8 +19,8 @@ main{
 
 .sectorA{
   display: flex;
-    flex-direction: column;
-    align-items: stretch;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .Artikelen{
@@ -48,6 +48,7 @@ ArtikelenChild > * {
 
 
 .ArtikelenChild > img{
+    align-items: baseline;
     width: 100%;
     object-fit: contain;
 }
@@ -68,6 +69,51 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 }
 
 .taxonamy{padding-top: var(--1em)}
+
+
+
+/*Dropdown kaarten*/
+.cbs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cbs-card {
+    flex: 1 1 90vw;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cbs-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.cbs-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.cbs-card a {
+    margin-top: auto;
+    color: #0066cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cbs-card a:hover {
+    text-decoration: underline;
+}
 @media only screen and (min-width: 700px) {
     body{
         background-color:green;
@@ -80,6 +126,9 @@ h1, .ArtikelTitel, .ArtikelLeadText{
     }
 
 
+    .ArtikelTitel{
+        height: 3em;
+    }
     .ArtikelenChild{
          flex: 0 1 25vw;
     }
@@ -88,6 +137,11 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         min-height: 10px;
         max-height: 45px;
         display: block;
+    }
+
+/*    Dropdwon result cards*/
+    .cbs-card {
+        flex: 1 1 280px;
     }
 
 }

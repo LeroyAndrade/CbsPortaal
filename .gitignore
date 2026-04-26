@@ -1,4 +1,6 @@
 __pycache__/
+app/__pycache__/__init_
+app/services/__pycache__
 *.pyc
 *.pyo
 *.pyd
@@ -8,3 +10,4 @@ venv/
 .env
 settings.py
 config.py
+
