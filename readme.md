@@ -60,3 +60,10 @@ docker compose restart app
 
 # MySQL
 > docker exec -it cbs_portal_db psql -U cbs -d cbs_portal
+
+# Push feature, in diezelfde featurebranch
+> git push origin naamVanFeature
+
+# Haal die feature op
+> git fetch origin
+> git checkout feature_cbs-data-opslag
