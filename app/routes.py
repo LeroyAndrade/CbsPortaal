@@ -5,7 +5,7 @@ import logging
 from flask_login import logout_user, login_user, login_required, current_user
 
 # Eigen imports
-from app.services.services import ArticleService
+from app.services.services import ArticleService, CbsDatasetDropdownService
 from app.models.user import User
 from app.extensions.db import db
 
@@ -15,16 +15,18 @@ bp = Blueprint('cbs', __name__)
 def index():
     return redirect(url_for('cbs.articles'))
 
+
 @bp.route("/articles")
 # @login_required
 def articles():
     # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
     # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
-    body_text = ArticleService.get_latest_cbs_article()
+    body_text: str = ArticleService.get_latest_cbs_article()
+    body_dropdown: str = CbsDatasetDropdownService.get_datasets()
 # debug here
     logging.debug(body_text)
 
-    return render_template('artikelen.html', articles=body_text)
+    return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown)
 
     # return data
 
