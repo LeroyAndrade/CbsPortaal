@@ -1,3 +1,10 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
 settings.py
 config.py
-.env
