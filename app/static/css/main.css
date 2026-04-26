@@ -71,25 +71,26 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 .taxonamy{padding-top: var(--1em)}
 
 
-
 /*Dropdown kaarten*/
 .cbs-grid {
     display: flex;
+    width: 98vw;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 1rem;
+
 }
 
 .cbs-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex: 1 1 90vw;
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .cbs-card h3 {
