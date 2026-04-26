@@ -23,7 +23,7 @@ def index():
 def articles():
     body_text = ArticleService.get_latest_cbs_article()
     body_dropdown = DatasetDropdownService.get_datasets()
-# debug here -delete me
+# Debug info -delete me
     logging.debug(body_text)
     return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown)
 

@@ -1,19 +1,21 @@
 import logging
 
 import httpx
-import requests
 
+# Debug info
 logging.basicConfig(
     level=logging.DEBUG,
     format="%(levelname)s - %(message)s"
 )
+
+BASE_URL = "https://www.cbs.nl/odata/v1"
 
 class ArticleService:
 
     @staticmethod
     def get_latest_cbs_article():
         # url = "https://www.cbs.nl/odata/v1/Articles?$filter=endswith(UniqueId, '-nl-nl')&$skip=3&$top=6&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
-        url = "https://www.cbs.nl/odata/v1/Articles?$filter=Language eq 'nl-NL'&$skip=2&$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
+        url = BASE_URL+"/Articles?$filter=Language eq 'nl-NL'&$skip=2&$top=3&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
 
         try:
             with httpx.Client() as client:
@@ -34,15 +36,13 @@ class ArticleService:
 
 
 class DatasetDropdownService:
-    BASE_URL = "https://www.cbs.nl/odata/v1/"
-
     @staticmethod
     def get_datasets():
         # maak een lege lijst voor aankomende loop
         datasets = []
         try:
              with httpx.Client(timeout=10) as client:
-                response = client.get(DatasetDropdownService.BASE_URL)
+                response = client.get(BASE_URL)
                 response.raise_for_status()
 
                 data = response.json()
@@ -60,15 +60,15 @@ class DatasetDropdownService:
 
 
 
+
 class CbsDataService:
-    BASE_URL = "https://www.cbs.nl/odata/v1/"
 
     @staticmethod
     def get_data(dataset):
         try:
             # http://localhost:5000/cbs/data?dataset=Articles
             # https://www.cbs.nl/odata/v1    /Articles
-            url = f"{CbsDataService.BASE_URL}{dataset}"
+            url = f"{BASE_URL}/{dataset}"
 
             with httpx.Client(timeout=10) as client:
                 response = client.get(url)
@@ -81,4 +81,3 @@ class CbsDataService:
         except Exception as e:
             logging.error(f"Fout bij ophalen CBS data: {e}")
             return []
-    #
