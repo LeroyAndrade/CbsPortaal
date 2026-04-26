@@ -17,54 +17,55 @@
 </head>
 <body>
    <p><a href="{{ url_for('cbs.index') }}">← Terug naar home</a></p>
-   <p> <a href="{{ url_for('cbs.logout') }}">← Log uit</a></p>
+   <p><a href="{{ url_for('cbs.logout') }}">← Log uit</a></p>
 
     <main>
-<!--        <div class="sectorA">-->
-<!--              {% for article in articles %}-->
-<!--           <section class="Artikelen">-->
-
-<!--              <div class="ArtikelenChild">-->
-<!--                  <p class="ArtikelTitel">{{ article.Title }}</p>-->
-<!--                      <p class="ArtikelLeadText">-->
-<!--                          {{ article.LeadText }}-->
-<!--                      </p>-->
-<!--                  <br>-->
-<!--                <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">-->
-<!--                   <p>Taxonomy: {{article.TaxonomyTags}}</p>-->
-<!--                  <p>Themes: {{article.Themes}}</p>-->
-<!--              </div>-->
-<!--           </section>-->
-<!--              {% endfor %}-->
-<!--        </div>-->
-
-
         <div class="sectorA">
+
+           <section class="Artikelen">
+             {% for article in articles %}
+                  <article class="ArtikelenChild">
+                      <div class="ArtikelTitel"><h1 class="">{{ article.Title }}</h1></div>
+                          <br>
+                          <div><h2><b>Themes:</b>   {{article.Themes}}</h2> </div>
+                          <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
+                          <div class="taxonamy">Taxonomy: {{article.TaxonomyTags}}</div>
+                      <p class="ArtikelLeadText ruim">
+                              {{ article.LeadText }}
+                          </p>
+                  </article>
+             {% endfor %}
+           </section>
+
+        </div>
+
+
+<!--        <div class="sectorA">-->
 
 
 <!--            master foreach item, controls flex-->
-        {% for article in articles %}-->
-           <section class="Artikelen">
+<!--        {% for article in articles %}&ndash;&gt;-->
+<!--           <section class="Artikelen">-->
 
-              <div class="ArtikelenChild">
-                  <p class="ArtikelTitel">Lorem Ipsum</p>
-                      <p class="ArtikelLeadText">
-                          Lorem ipsum
-                          Lorem ipsum
-                          Lorem ipsum
-                          Lorem ipsum
-                          Lorem ipsum
-                          Lorem ipsum
+<!--              <div class="ArtikelenChild">-->
+<!--                  <p class="ArtikelTitel">Lorem Ipsum</p>-->
+<!--                      <p class="ArtikelLeadText">-->
+<!--                          Lorem ipsum-->
+<!--                          Lorem ipsum-->
+<!--                          Lorem ipsum-->
+<!--                          Lorem ipsum-->
+<!--                          Lorem ipsum-->
+<!--                          Lorem ipsum-->
 
-                      </p>
-                  <br>
-                <img src="https://cdn.cbs.nl/images/6a48317652416a4f367a4e66784465394379723734673d3d/900x450.jpg" alt="afbeelding man tankt auto">
-              </div>
-           </section>
+<!--                      </p>-->
+<!--                  <br>-->
+<!--                <img src="https://cdn.cbs.nl/images/6a48317652416a4f367a4e66784465394379723734673d3d/900x450.jpg" alt="afbeelding man tankt auto">-->
+<!--              </div>-->
+<!--           </section>-->
+<!--        </div>-->
+<!--        {% endfor %}-->
 
-        {% endfor %}
 
-        </div>
 
 
 <!--        -->
@@ -89,7 +90,7 @@
 
 
 
-        </div>
+<!--        </div>-->
 
 
     </main>

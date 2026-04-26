@@ -85,11 +85,11 @@ Path plots niet bekend op Macbook na sluimerstand
 > python main.py
 
 
-# =========================
 # STOP PROJECT
-# =========================
+> docker compose down
 
-docker compose down
+# Forceer nieuw package in requirement.txx na buid
+> docker compose build --no-cache
 
 # Op Mac M chip na upgrade
 > deactivate
