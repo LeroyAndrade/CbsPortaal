@@ -1,11 +1,12 @@
 # Flask imports
-from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for, jsonify
 import logging
 # Flask-Login imports
 from flask_login import logout_user, login_user, login_required, current_user
+from typing import List
 
 # Eigen imports
-from app.services.services import ArticleService, CbsDatasetDropdownService
+from app.services.services import ArticleService, DatasetDropdownService, CbsDataService
 from app.models.user import User
 from app.extensions.db import db
 
@@ -16,19 +17,35 @@ def index():
     return redirect(url_for('cbs.articles'))
 
 
+
 @bp.route("/articles")
 # @login_required
 def articles():
-    # url = "https://www.cbs.nl/odata/v1/Articles?waa$top=1&$orderby=ReleaseTime%20desc&select=Body"
-    # url = "https://www.cbs.nl/odata/v1/Articles?$top=1&$orderby=ReleaseTime%20desc&$select=Body,Title,ReleaseTime,Url,Image"
-    body_text: str = ArticleService.get_latest_cbs_article()
-    body_dropdown: str = CbsDatasetDropdownService.get_datasets()
-# debug here
+    body_text = ArticleService.get_latest_cbs_article()
+    body_dropdown = DatasetDropdownService.get_datasets()
+# debug here -delete me
     logging.debug(body_text)
-
     return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown)
 
-    # return data
+
+
+@bp.route("/cbs/data")
+def cbs_data():
+    dataset = request.args.get("dataset")
+
+    if not dataset:
+        return jsonify({"error": "Geen dataset meegegeven"}), 400
+
+    valid_datasets = DatasetDropdownService.get_datasets()
+
+    if dataset not in valid_datasets:
+        return jsonify({"error": "Ongeldige dataset"}), 400
+
+    data = CbsDataService.get_data(dataset)
+
+    return jsonify(data)
+
+
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -59,9 +76,13 @@ def login():
 
     return render_template('login.html')
 
+
+
 @bp.route('/test')
 def test():
     return render_template('test.html')
+
+
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():

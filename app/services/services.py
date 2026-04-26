@@ -1,5 +1,12 @@
+import logging
+
 import httpx
 import requests
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(levelname)s - %(message)s"
+)
 
 class ArticleService:
 
@@ -13,29 +20,65 @@ class ArticleService:
                 r = client.get(url)
                 r.raise_for_status()
                 data = r.json()
+# Debug info
+                logging.debug(f"data: {data}")
+                logging.debug(f"data keys: {data.keys()}")
+                logging.debug(f"value: {data.get('value')}")
                 return data.get("value", [])
+
         except Exception as e:
             print(f"Artikelen fetchen error: \n{e}")
             return []
 
-class CbsDatasetDropdownService:
-    BASE_URL = "https://www.cbs.nl/odata/v1/Articles?$filter=Language eq 'nl-NL'&"
 
-    import httpx
-    class CbsDatasetDropdownService:
-        BASE_URL = "https://www.cbs.nl/odata/v1/"
 
-        @staticmethod
-        def get_datasets():
-            try:
-                with httpx.Client(timeout=10) as client:
-                    response = client.get(CbsDatasetDropdownService.BASE_URL)
-                    response.raise_for_status()
-                    data = response.json()
 
-                    datasets = [item["name"] for item in data.get("value", [])]
-                    return datasets
+class DatasetDropdownService:
+    BASE_URL = "https://www.cbs.nl/odata/v1/"
 
-            except Exception:
-                return ["Articles", "Vacancies", "Pages"]
+    @staticmethod
+    def get_datasets():
+        # maak een lege lijst voor aankomende loop
+        datasets = []
+        try:
+             with httpx.Client(timeout=10) as client:
+                response = client.get(DatasetDropdownService.BASE_URL)
+                response.raise_for_status()
 
+                data = response.json()
+
+                # loop door alles wat CBS teruggeeft in de API
+                for item in data.get("value", []):
+                    datasets.append(item["name"])
+# Debug info
+                logging.info(f"CBS datasets opgehaald: {datasets}")
+                return datasets
+
+        except Exception as e:
+            logging.error(f"Fout bij ophalen CBS datasets: {e}")
+            return datasets
+
+
+
+class CbsDataService:
+    BASE_URL = "https://www.cbs.nl/odata/v1/"
+
+    @staticmethod
+    def get_data(dataset):
+        try:
+            # http://localhost:5000/cbs/data?dataset=Articles
+            # https://www.cbs.nl/odata/v1    /Articles
+            url = f"{CbsDataService.BASE_URL}{dataset}"
+
+            with httpx.Client(timeout=10) as client:
+                response = client.get(url)
+                response.raise_for_status()
+
+                data = response.json()
+
+                return data.get("value", [])
+
+        except Exception as e:
+            logging.error(f"Fout bij ophalen CBS data: {e}")
+            return []
+    #

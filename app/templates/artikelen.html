@@ -41,18 +41,81 @@
     </main>
 
 
-    <section class="dropdown">
-        <select name="dataset">
-            <option value="Articles">Articles</option>
-            <option value="Definitions">Definitions</option>
-            <option value="Media">Media</option>
-            <option value="Events">Events</option>
-            <option value="Flash">Flash</option>ß
-            <option value="Pages">Pages</option>
-            <option value="Search">Search</option>
-            <option value="Vacancies">Vacancies</option>
-         </select>
-    </section>
+    <br><br>
 
-</body>
+        <section class="dropdown">
+            <select id="datasetSelect">
+                <!-- Data vanuit services -->
+                {% for dd in dropdown %}
+                    <option value="{{ dd }}">{{ dd }}</option>
+                {% endfor %}
+            </select>
+        </section>
+
+
+        <div id="result"></div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+
+                const loadData = async () => {
+
+                    const dataset = document.getElementById('datasetSelect').value || 'Articles';
+                    const resultDiv = document.getElementById('result');
+
+                    resultDiv.innerHTML = '<p>Laden...</p>';
+
+                    try {
+                        const res = await fetch(`/cbs/data?dataset=${dataset}`);
+
+                        // if error: toon
+                        if (!res.ok) throw new Error('Netwerk fout ' + res);
+
+                        // conv naar JSON
+                        const items = await res.json();
+
+                        // if niets teruggekregen
+                        if (items.length === 0) {
+                            resultDiv.innerHTML = '<p>Geen resultaten gevonden.</p>';
+                            return;
+                        }
+
+                        // Bouw HTML lijst op
+                        const topItems = items.slice(0, 10);
+
+                        let html = '<div class="cbs-grid">';
+
+                        topItems.forEach(item => {
+                            const title = item.Title || item.Name || 'Geen titel';
+                            const description = item.LeadText || item.Description || '';
+                            const hasLink = item.Url;
+
+                            html += `
+                                <article class="cbs-card">
+                                    <h3>${title}</h3>
+                                    <p>${description}</p>
+                                    ${hasLink ? `<a href="${item.Url}" target="_blank">Lees meer</a>` : ''}
+                                </article>
+                            `;
+                        });
+
+                        html += '</div>';
+
+                        resultDiv.innerHTML = html;
+
+                    } catch (err) {
+                        console.error(err);
+                        resultDiv.innerHTML = '<p class="error">Kon data niet ophalen. Probeer het later opnieuw.</p>';
+                    }
+                };
+
+                loadData();
+                // als dropdown value verandert, herladen value
+                document.getElementById('datasetSelect').addEventListener('change', loadData);  // Herlaad bij dropdown wijzigen
+            });
+        </script>
+
+
+    </body>
 </html>
