@@ -5,11 +5,13 @@ h2{ font-weight: normal;}
 h1{font-size: 14px;}
 h2{font-size: 13px;}
 
-body{
-    font-family: sans-serif, Verdana;
+body {
+    color:#ddd;
+    margin:0;
+    font-family:sans-serif, Verdana;
     font-size: 13px;
-    background-color:#F1F1F1;
-    width: 99vw;
+    background:#111118;
+    width: 99dvw;
     margin:0 var(--1em);
 }
 
@@ -21,6 +23,27 @@ main{
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+/*Menu*/
+.dashboard-container {
+    display:flex;
+    flex-direction: column;
+}
+
+
+.sidebar {
+    width:100%;
+    background:#181824;
+    padding:20px;
+    border-right:1px solid #333;
+}
+
+.main-content {
+    flex:1;
+    padding:20px;
+    overflow:auto;
+    background:#111118;
 }
 
 .Artikelen{
@@ -36,8 +59,8 @@ main{
     align-items: baseline;
     display: flex;
     flex-direction: column;
-    width: 30vw;
-    flex: 0 1 90vw;
+    width: 30dvw;
+    flex: 0 1 90dvw;
     height: auto;
 }
 
@@ -53,11 +76,11 @@ ArtikelenChild > * {
     object-fit: contain;
 }
 
-    .ArtikelLeadText{
-        width: 100%;
-        padding: var(--1em) 0;
-        overflow: hidden;
-    }
+.ArtikelLeadText{
+    width: 100%;
+    padding: var(--1em) 0;
+    overflow: hidden;
+}
 
 .ArtikelenChild, .ArtikelLeadText{
     padding-bottom: .5rem;
@@ -70,22 +93,20 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 
 .taxonamy{padding-top: var(--1em)}
 
-
 /*Dropdown kaarten*/
 .cbs-grid {
     display: flex;
-    width: 98vw;
+    width: 98dvw;
     flex-wrap: wrap;
     gap: 1rem;
     margin-top: 1rem;
-
 }
 
 .cbs-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    flex: 1 1 90vw;
+    flex: 1 1 90dvw;
     background: #fff;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
@@ -115,11 +136,39 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 .cbs-card a:hover {
     text-decoration: underline;
 }
+
+
 @media only screen and (min-width: 700px) {
     body{
-        background-color:green;
+        background: #020a23;
     }
 
+    .dashboard-container{
+        flex-direction: unset;
+        min-width: 38dvw !important;
+    }
+
+    a{ font-size: 2rem;
+    text-decoration: none;}
+
+    button{
+       width: 75px;
+       height: 50px;
+    }
+
+    .sidebar{
+        flex: 0 1 31dvw;
+        display: inline-grid;
+        max-height: 68dvh;
+        min-width: 25dvw;
+        max-width: 30dvw;
+    }
+
+    .menu{
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+    }
 
     .Artikelen{
         flex-wrap: wrap;
@@ -131,7 +180,7 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         height: 3em;
     }
     .ArtikelenChild{
-         flex: 0 1 25vw;
+         flex: 0 1 25dvw;
     }
 
     .ruim{
