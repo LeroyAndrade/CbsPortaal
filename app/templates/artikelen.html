@@ -16,29 +16,55 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-   <p><a href="{{ url_for('cbs.index') }}">← Terug naar home</a></p>
-   <p><a href="{{ url_for('cbs.logout') }}">← Log uit</a></p>
 
-    <main>
-        <div class="sectorA">
+<div class="flexSectorRow">
+<!---->
+        <div class="dashboard-container">
 
-           <section class="Artikelen">
-             {% for article in articles %}
-                  <article class="ArtikelenChild">
-                      <div class="ArtikelTitel"><h1 class="">{{ article.Title }}</h1></div>
-                          <br>
-                          <div><h2><b>Themes:</b>   {{article.Themes}}</h2> </div>
-                          <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
-                          <div class="taxonamy">Taxonomy: {{article.TaxonomyTags}}</div>
-                      <p class="ArtikelLeadText ruim">
-                              {{ article.LeadText }}
-                          </p>
-                  </article>
-             {% endfor %}
-           </section>
+          <!-- SIDEBAR -->
+          <aside class="sidebar">
+            <div class="user-info">
+              <div class="avatar"></div>
+              <div>
+                <strong>Hi, @cbs_user!</strong><br>
+                <small>Session: 14:30</small>
+              </div>
+            </div>
 
+            <nav class="menu">
+              <a href="#" class="active">📊 Dashboard</a>
+              <a href="#"> Overview</a>
+              <a href="#"> Analytics</a>
+              <a href="#"> Statistic</a>
+              <a href="#"> Settings</a>
+              <a href="#"> Support</a>
+            </nav>
+
+            <button class="logout">Log out</button>
+          </aside>
+
+
+            <main>
+                <div class="sectorA">
+
+                   <section class="Artikelen">
+                     {% for article in articles %}
+                          <article class="ArtikelenChild">
+                              <div class="ArtikelTitel"><h1 class="">{{ article.Title }}</h1></div>
+                                  <br>
+                                  <div><h2><b>Themes:</b>   {{article.Themes}}</h2> </div>
+                                  <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
+                                  <div class="taxonamy">Taxonomy: {{article.TaxonomyTags}}</div>
+                              <p class="ArtikelLeadText ruim">
+                                      {{ article.LeadText }}
+                                  </p>
+                          </article>
+                     {% endfor %}
+                   </section>
+
+                </div>
+            </main>
         </div>
-    </main>
 
 
     <br><br>
@@ -53,8 +79,25 @@
         </section>
 
 
-        <div id="result"></div>
+       <div class="grid">
+      <!-- Artikelen -->
+      <div class="card">
+        <h3>Artikelen</h3>
+        <div class="circle">{{ articles_count }}</div>
+      </div>
 
+      <!-- Recente Artikelen -->
+      <div class="card">
+        <h3 class="purple">Recente Artikelen</h3>
+        {% for a in recent_articles %}
+          <p>{{ a.get('Title') or 'Geen titel' }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+
+
+        <div id="result"></div>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
