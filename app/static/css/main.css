@@ -137,6 +137,29 @@ h1, .ArtikelTitel, .ArtikelLeadText{
     text-decoration: underline;
 }
 
+<<<<<<< Updated upstream
+=======
+/*Menu*/
+.dashboard-container {
+    display:flex;
+    flex-direction: column;
+}
+
+
+.sidebar {
+    width:100%;
+    background:#181824;
+    padding:20px;
+    border-right:1px solid #333;
+}
+
+.main-content {
+    flex:1;
+    padding:20px;
+    overflow:auto;
+    background:#111118;
+}
+>>>>>>> Stashed changes
 
 @media only screen and (min-width: 700px) {
     body{
