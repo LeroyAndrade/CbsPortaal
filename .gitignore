@@ -1,6 +1,8 @@
 __pycache__/
 app/__pycache__/__init_
 app/services/__pycache__
+run_once_only.py
+scripts/runMeOnce.py
 *.pyc
 *.pyo
 *.pyd
@@ -10,4 +12,3 @@ venv/
 .env
 settings.py
 config.py
-
