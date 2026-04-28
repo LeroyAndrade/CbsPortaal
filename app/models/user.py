@@ -7,7 +7,7 @@ from datetime import datetime
 # User tabel
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    id = db.Column('id', db.Integer, unique=True,primary_key=True, autoincrement=True, nullable=False,)
+    id = db.Column('user_id', db.Integer, unique=True,primary_key=True, autoincrement=True, nullable=False,)
     username = db.Column('username', db.String(80), unique=True, nullable=False, index=True)
     password_hash = db.Column("password_hash", db.String(300), nullable=False)
     email = db.Column('email', db.String(120), unique=True, nullable=False, index=True)

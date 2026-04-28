@@ -77,11 +77,9 @@ def login():
     return render_template('login.html')
 
 
-
 @bp.route('/test')
 def test():
     return render_template('test.html')
-
 
 
 @bp.route('/register', methods=['GET', 'POST'])
