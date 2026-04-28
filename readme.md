@@ -28,8 +28,8 @@
 
 # MIGRATIES (tijdens ontwikkeling)
 > docker compose exec app flask db migrate -m "jouw bericht"
-docker compose exec app flask db upgrade
-docker compose restart app
+> docker compose exec app flask db upgrade
+> docker compose restart app
 
 
 # FULL RESET (alles weg, begin opnieuw)
@@ -62,7 +62,7 @@ docker compose restart app
 > docker exec -it cbs_portal_db psql -U cbs -d cbs_portal
 
 # Push feature, in diezelfde featurebranch
-> git push origin naamVanFeature
+> git push origin feature_save_api_data
 
 # Haal die feature op
 > git fetch origin

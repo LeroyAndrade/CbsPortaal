@@ -1,7 +1,7 @@
 :root {
   --1em: 1em;
+  --2em: 2em;
 }
-h2{ font-weight: normal;}
 h1{font-size: 14px;}
 h2{font-size: 13px;}
 
@@ -10,11 +10,14 @@ body {
     margin:0;
     font-family:sans-serif, Verdana;
     font-size: 13px;
-    background:#111118;
+    background: linear-gradient(#a9a9d6, #2E2E5AFF);
     width: 99dvw;
     margin:0 var(--1em);
 }
 
+.avatar > img{
+    max-width: 30vw;
+}
 main{
     width: 100%;
 }
@@ -34,7 +37,7 @@ main{
 
 .sidebar {
     width:100%;
-    background:#181824;
+    background:#a9a9d6;
     padding:20px;
     border-right:1px solid #333;
 }
@@ -62,6 +65,7 @@ main{
     width: 30dvw;
     flex: 0 1 90dvw;
     height: auto;
+    margin: 0 auto;
 }
 
 ArtikelenChild > * {
@@ -96,10 +100,11 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 /*Dropdown kaarten*/
 .cbs-grid {
     display: flex;
-    width: 98dvw;
+    width: 90dvw;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1rem;
+    /*margin-top: 1rem;*/
+    margin: 0 auto;
 }
 
 .cbs-card {
@@ -139,10 +144,19 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 
 
 @media only screen and (min-width: 700px) {
-    body{
+    body {
         background: #020a23;
+        font-size: 13px;
     }
+}
 
+@media only screen and (min-width: 1100px) {
+    body { font-size: 15px;
+        background: linear-gradient(#a9a9d6, #27274b, #27274b);}
+
+    h1{
+        font-size: 14px;
+    }
     .dashboard-container{
         flex-direction: unset;
         min-width: 38dvw !important;
@@ -160,8 +174,12 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         flex: 0 1 31dvw;
         display: inline-grid;
         max-height: 68dvh;
-        min-width: 25dvw;
-        max-width: 30dvw;
+        min-width: 20dvw;
+        max-width: 15dvw;
+    }
+
+    .sidebar:hover{
+        box-shadow: 10px 5px 5px #000;
     }
 
     .menu{
@@ -180,12 +198,16 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         height: 3em;
     }
     .ArtikelenChild{
-         flex: 0 1 25dvw;
+        flex: 0 1 22dvw;
+        padding-bottom: var(--2em);
+        border: 1px solid green;
+        border-radius: 15px;
+        margin: 1em 0;
     }
 
     .ruim{
         min-height: 10px;
-        max-height: 45px;
+        max-height: 42px;
         display: block;
     }
 
