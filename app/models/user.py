@@ -28,3 +28,9 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+#Logging tabel
+class userlogging(db.Model, UserMixin):
+    __tablename__ = 'userlogging'
+    id = db.Column('userlogging_id', db.Integer, unique=True,primary_key=True, autoincrement=True, nullable=False,)
+    inlogtijden = db.column('inlogtijden', db.Integer, unique=True, nullable=True)
+    useracties = db.column('useracties', db.String(100))

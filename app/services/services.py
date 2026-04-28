@@ -15,7 +15,7 @@ class ArticleService:
     @staticmethod
     def get_latest_cbs_article():
         # url = "https://www.cbs.nl/odata/v1/Articles?$filter=endswith(UniqueId, '-nl-nl')&$skip=3&$top=6&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
-        url = BASE_URL+"/Articles?$filter=Language eq 'nl-NL'&$skip=12&$top=6&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
+        url = BASE_URL+"/Articles?$filter=Language eq 'nl-NL'&$skip=14&$top=6&$orderby=ReleaseTime%20desc&$select=Title,Url,Image,Themes,TaxonomyTags,LeadText"
 
         try:
             with httpx.Client() as client:
