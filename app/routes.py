@@ -26,7 +26,7 @@ def articles():
     body_dropdown = DatasetDropdownService.get_datasets()
 # Debug info -delete me
     logging.debug(body_text)
-    return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown)
+    return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown, current_user=current_user.username)
 
 
 
@@ -101,20 +101,27 @@ def register():
 
         if user:
             flash('Gebruikersnaam bestaat al', 'error')
+            # todo add: IP
+            UserLog.log_action(user, "Registratie poging door een ander")
         else:
             new_user = User(username=username, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
 
-            flash('Account aangemaakt, je kunt nu inloggen', 'success')
+    # UserLog.log_action(user, "Registratie succesvol")
+
+            flash('Account aangemaakt, u kunt nu inloggen', 'success')
             return redirect(url_for('cbs.login'))
 
     return render_template('register.html')
+
+
 @bp.route('/logout')
 def logout():
-    session['_user_id'] = False
-    # session['logged_in'] = False
-    # session['user'] = False
+    if current_user.is_authenticated:
+       UserLog.log_action(current_user, "Logged out")
+
+    # session['_user_id'] = False
     logout_user()
     session.pop('user', None)
     flash('U bent uitgelogd', 'success')

@@ -1,12 +1,13 @@
 :root {
   --1em: 1em;
   --2em: 2em;
+  --black: black;
 }
 h1{font-size: 14px;}
 h2{font-size: 13px;}
 
 body {
-    color:#ddd;
+    color:var(--black);
     margin:0;
     font-family:sans-serif, Verdana;
     font-size: 13px;
@@ -93,6 +94,7 @@ ArtikelenChild > * {
 h1, .ArtikelTitel, .ArtikelLeadText{
     width: 100%;
     padding-bottom: .5em;
+    color: var(--black);
 }
 
 .taxonamy{padding-top: var(--1em)}
@@ -126,14 +128,14 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 
 .cbs-card p {
     font-size: 0.9rem;
-    color: #000;
+    color: var(--black);
     margin-bottom: 1rem;
     line-height: 1.4;
 }
 
 .cbs-card a {
     margin-top: auto;
-    color: #0066cc;
+    color: var(--black);
     font-weight: 600;
     text-decoration: none;
 }
@@ -152,8 +154,8 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 
 @media only screen and (min-width: 1100px) {
     body { font-size: 15px;
-        background: linear-gradient(#a9a9d6, #27274b, #27274b);}
-
+        background: linear-gradient(#a9a9d6, #6969c0, #6767dd);}
+        background-repeat: no-repeat;
     h1{
         font-size: 14px;
     }
@@ -193,16 +195,25 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         justify-content: space-around;
     }
 
-
     .ArtikelTitel{
         height: 3em;
     }
+
     .ArtikelenChild{
         flex: 0 1 22dvw;
         padding-bottom: var(--2em);
         border: 1px solid green;
         border-radius: 15px;
         margin: 1em 0;
+    }
+
+    .ArtikelenChild:hover {
+        box-shadow: 6px 7px 9px rgb(255, 255, 255);
+    }
+
+    .ArtikelenChild:nth-child(3n+3):hover{
+        /*box-shadow: -8px 7px 9px rgb(0, 0, 0);*/
+        box-shadow: -8px 7px 9px rgb(255, 255, 255);
     }
 
     .ruim{
@@ -216,5 +227,4 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         flex: 1 1 280px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
-
 }
