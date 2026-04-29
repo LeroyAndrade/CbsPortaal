@@ -1,13 +1,14 @@
 # Flask imports
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for, jsonify
+from datetime import datetime, UTC
 import logging
 # Flask-Login imports
 from flask_login import logout_user, login_user, login_required, current_user
 from typing import List
 
 # Eigen imports
-from app.services.services import ArticleService, DatasetDropdownService, CbsDataService
-from app.models.user import User
+from app.services.services import ArticleService, DatasetDropdownService, CbsDataService, UserService
+from app.models.user import User, UserLogging
 from app.extensions.db import db
 
 bp = Blueprint('cbs', __name__)
@@ -61,6 +62,10 @@ def login():
 
         if user:
             if user.check_password(password):
+                # logging
+                user.last_logged_in = datetime.now(UTC)
+                UserService.log_action(user, "Ingelogd", datetime.now(UTC))
+
                 session['logged_in'] = True
                 session['user'] = username
                 login_user(user)

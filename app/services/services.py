@@ -1,6 +1,9 @@
 import logging
 
 import httpx
+from datetime import datetime
+
+from models.user import UserLogging
 
 # Debug info
 logging.basicConfig(
@@ -80,3 +83,12 @@ class CbsDataService:
         except Exception as e:
             logging.error(f"Fout bij ophalen CBS data: {e}")
             return []
+
+
+
+# Logging user acties
+class UserService:
+
+    @staticmethod
+    def log_action(user, actie, logged_at: str):
+        user.logs.append(UserLogging(useracties=actie, logged_at=logged_at))
