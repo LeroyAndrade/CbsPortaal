@@ -2,8 +2,9 @@ import logging
 
 import httpx
 from datetime import datetime, UTC
+from app.extensions.db import db
 
-from app.models.user import UserLogging, User
+from app.models.user import UserLogging, User, CBSArticle
 
 # Debug info
 logging.basicConfig(
@@ -98,3 +99,40 @@ class UserLog:
         user.logs.append(
             UserLogging(useracties=actie, logged_at=logged_at)
         )
+
+class SlaArtikelOp:
+    def save_10_artikelen(self, response_json):
+        if not response_json or 'value' not in response_json:
+            print("ERROR: Geen 'value' in response")
+            return
+
+        values = response_json.get('value', [])[:10]
+        added = 0
+
+        for record in values:
+            article = CBSArticle(
+                title=record.get('Title', 'Geen titel'),
+                release_time=record.get('ReleaseTime'),
+                summary=record.get('MetaDescription', ''),
+                url=record.get('Url', ''),
+                fetched_at=datetime.utcnow()
+            )
+
+            existing = CBSArticle.query.filter_by(
+                title=article.title,
+                release_time=article.release_time
+            ).first()
+
+            if existing:
+                print(f"SKIP: {article.title}")
+                continue
+
+            db.session.add(article)
+            added += 1
+            print(f"TOEVOEGEN: {article.title[:60]}")
+
+        if added > 0:
+            db.session.commit()
+            print(f"SUCCES → {added} artikelen opgeslagen")
+        else:
+            print("Niets nieuws om op te slaan")

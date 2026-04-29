@@ -7,8 +7,8 @@ from flask_login import logout_user, login_user, login_required, current_user
 from typing import List
 
 # Eigen imports
-from app.services.services import ArticleService, DatasetDropdownService, CbsDataService, UserLog
-from app.models.user import User, UserLogging
+from app.services.services import ArticleService, DatasetDropdownService, CbsDataService, UserLog, SlaArtikelOp
+from app.models.user import User, UserLogging, CBSArticle
 from app.extensions.db import db
 
 bp = Blueprint('cbs', __name__)
@@ -26,7 +26,10 @@ def articles():
     body_dropdown = DatasetDropdownService.get_datasets()
 # Debug info -delete me
     logging.debug(body_text)
-    return render_template('artikelen.html', articles=body_text, dropdown=body_dropdown, current_user=current_user.username)
+    return render_template('artikelen.html',
+                           articles=body_text,
+                           dropdown=body_dropdown,
+                           current_user=current_user.username)
 
 
 
@@ -45,7 +48,6 @@ def cbs_data():
     data = CbsDataService.get_data(dataset)
 
     return jsonify(data)
-
 
 
 @bp.route('/login', methods=['GET', 'POST'])
