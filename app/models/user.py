@@ -46,3 +46,14 @@ class UserLogging(db.Model):
     useracties = db.Column(db.String(200), nullable=False)
 
     user = db.relationship('User', back_populates='logs')
+
+
+class CBSArticle(db.Model):
+    __tablename__ = 'cbsarticle'
+
+    cbs_article_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(500), nullable=False)
+    release_time = db.Column(db.DateTime)
+    summary = db.Column(db.Text)
+    url = db.Column(db.String(500))
+    fetched_at = db.Column(db.DateTime, nullable=False)
