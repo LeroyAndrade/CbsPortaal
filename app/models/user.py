@@ -38,7 +38,7 @@ class UserLogging(db.Model):
 
     userlogging_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    logged_at = db.Column(db.DateTime, nullable=False)
+    logged_at = db.Column(db.DateTime(timezone=True), nullable=False)
     useracties = db.Column(db.String(200), nullable=False)
 
     user = db.relationship('User', back_populates='logs')

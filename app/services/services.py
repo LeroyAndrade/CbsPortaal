@@ -1,9 +1,9 @@
 import logging
 
 import httpx
-from datetime import datetime
+from datetime import datetime, UTC
 
-from models.user import UserLogging
+from models.user import UserLogging, User
 
 # Debug info
 logging.basicConfig(
@@ -87,8 +87,14 @@ class CbsDataService:
 
 
 # Logging user acties
-class UserService:
+class UserLog:
 
     @staticmethod
-    def log_action(user, actie, logged_at: str):
-        user.logs.append(UserLogging(useracties=actie, logged_at=logged_at))
+    def log_action(user : User, actie:str, logged_at: datetime | None = None):
+        if logged_at is None:
+            # Tijd van server
+            logged_at = datetime.now(UTC)
+
+        user.logs.append(
+            UserLogging(useracties=actie, logged_at=logged_at)
+        )
