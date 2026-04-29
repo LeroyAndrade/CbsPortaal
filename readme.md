@@ -9,6 +9,8 @@
 > docker compose up --build -d
 
 # Migraties eerste keer
+
+[//]: # (flask db migrate -m "migratie tekst") - niet in gebruik
 > docker compose exec app flask db init
 > 
 > docker compose exec app flask db migrate -m "initial migration"
@@ -67,5 +69,4 @@
 # Haal die feature op
 > git fetch origin
 > git checkout feature_cbs-data-opslag
-> 
-> docker compose exec app flask db migrate -m "New logging tabel"
+>

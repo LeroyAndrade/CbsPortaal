@@ -3,7 +3,7 @@ import logging
 import httpx
 from datetime import datetime, UTC
 
-from models.user import UserLogging, User
+from app.models.user import UserLogging, User
 
 # Debug info
 logging.basicConfig(

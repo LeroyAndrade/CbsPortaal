@@ -18,7 +18,11 @@ class User(db.Model, UserMixin):
 
     logs = db.relationship('UserLogging', back_populates='user', lazy=True)
 
+    def get_id(self):
+        return str(self.user_id)
+
     def __init__(self, username, email, password=None):
+
         self.username = username
         self.email = email
 

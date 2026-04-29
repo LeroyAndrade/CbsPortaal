@@ -20,7 +20,7 @@ def index():
 
 
 @bp.route("/articles")
-# @login_required
+@login_required
 def articles():
     body_text = ArticleService.get_latest_cbs_article()
     body_dropdown = DatasetDropdownService.get_datasets()
@@ -64,11 +64,13 @@ def login():
             if user.check_password(password):
                 # logging
                 UserLog.log_action(user, "Ingelogd")
-                # todo, ok deze tijd van de server halen
-                user.last_logged_in = datetime.now(UTC)
-
                 session['logged_in'] = True
                 session['user'] = username
+
+                # todo, ook deze tijd van de server halen
+                user.last_logged_in = datetime.now(UTC)
+                db.session.commit()
+
                 login_user(user)
                 return redirect(url_for('cbs.articles'))
             else:
