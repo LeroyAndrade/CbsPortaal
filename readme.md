@@ -1,10 +1,4 @@
-### Live demo
-> https://cbsportaal.onrender.com
-
-
 # installeren
-
-
 ## Eerste keer setup (EENMALIG)
 
 > python3.14 -m venv env
