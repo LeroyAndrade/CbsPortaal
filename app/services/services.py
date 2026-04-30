@@ -100,16 +100,16 @@ class UserLog:
             UserLogging(useracties=actie, logged_at=logged_at)
         )
 
+
 class SlaArtikelOp:
-    def save_10_artikelen(self, response_json):
-        if not response_json or 'value' not in response_json:
-            print("ERROR: Geen 'value' in response")
+    def save_10_artikelen(self, articles_list):
+        """Slaat maximaal 10 artikelen op uit een lijst"""
+        if not articles_list:
+            print("Geen artikelen ontvangen")
             return
 
-        values = response_json.get('value', [])[:10]
         added = 0
-
-        for record in values:
+        for record in articles_list[:10]:
             article = CBSArticle(
                 title=record.get('Title', 'Geen titel'),
                 release_time=record.get('ReleaseTime'),
@@ -118,13 +118,14 @@ class SlaArtikelOp:
                 fetched_at=datetime.utcnow()
             )
 
+            # Simpele duplicate check
             existing = CBSArticle.query.filter_by(
                 title=article.title,
                 release_time=article.release_time
             ).first()
 
             if existing:
-                print(f"SKIP: {article.title}")
+                print(f"SKIP: {article.title[:60]}")
                 continue
 
             db.session.add(article)

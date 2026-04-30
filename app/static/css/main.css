@@ -43,6 +43,7 @@ main{
     border-right:1px solid #333;
 }
 
+
 .main-content {
     flex:1;
     padding:20px;
@@ -118,7 +119,7 @@ h1, .ArtikelTitel, .ArtikelLeadText{
     border: 1px solid #e5e7eb;
     border-radius: 10px;
     padding: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 12px 15px 16px -8px #000;
 }
 
 .cbs-card h3 {
@@ -144,6 +145,15 @@ h1, .ArtikelTitel, .ArtikelLeadText{
     text-decoration: underline;
 }
 
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+input[type='submit']{
+    padding: 12px 20px;
+    font-size: 16px;
+}
 
 @media only screen and (min-width: 700px) {
     body {
@@ -178,11 +188,11 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         max-height: 68dvh;
         min-width: 20dvw;
         max-width: 15dvw;
+        border-top-right-radius: 20px;
+        box-shadow: 12px 15px 16px -8px #000;
     }
 
-    .sidebar:hover{
-        box-shadow: 10px 5px 5px #000;
-    }
+
 
     .menu{
       display: flex;
@@ -205,15 +215,16 @@ h1, .ArtikelTitel, .ArtikelLeadText{
         border: 1px solid green;
         border-radius: 15px;
         margin: 1em 0;
+        box-shadow: 12px 15px 16px -8px #000;
     }
 
     .ArtikelenChild:hover {
-        box-shadow: 6px 7px 9px rgb(255, 255, 255);
+        box-shadow: 12px 15px 16px -8px rgb(255 255 255);
     }
 
     .ArtikelenChild:nth-child(3n+3):hover{
         /*box-shadow: -8px 7px 9px rgb(0, 0, 0);*/
-        box-shadow: -8px 7px 9px rgb(255, 255, 255);
+        box-shadow: -12px 15px 16px -8px rgb(255 255 255);
     }
 
     .ruim{

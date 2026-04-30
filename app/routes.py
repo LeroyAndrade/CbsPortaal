@@ -24,12 +24,19 @@ def index():
 def articles():
     body_text = ArticleService.get_latest_cbs_article()
     body_dropdown = DatasetDropdownService.get_datasets()
-# Debug info -delete me
+
+    # formulier button, ophalen opgeslagen API data
+    artikelGet10 = CBSArticle.query.order_by(CBSArticle.fetched_at.desc()).limit(10).all()
+
+    # Debug info -delete me
     logging.debug(body_text)
     return render_template('artikelen.html',
                            articles=body_text,
                            dropdown=body_dropdown,
-                           current_user=current_user.username)
+                           current = current_user,
+                           current_user=current_user.username,
+                           current_time = current_user.last_logged_in,
+                           artikelGet10=artikelGet10)
 
 
 
@@ -48,6 +55,24 @@ def cbs_data():
     data = CbsDataService.get_data(dataset)
 
     return jsonify(data)
+
+sla_artikel_op = SlaArtikelOp()
+
+
+@bp.route('/fetch', methods=['POST'])
+def fetch_and_save():
+    try:
+        # Direct de list doorgeven
+        articles_list = CbsDataService.get_data('Articles')
+
+        sla_artikel_op.save_10_artikelen(articles_list)
+
+        flash('10 artikelen opgehaald en opgeslagen')
+    except Exception as e:
+        print(f"ERROR: {e}")
+        flash(f'Fout: {str(e)}')
+
+    return redirect(url_for('cbs.articles'))
 
 
 @bp.route('/login', methods=['GET', 'POST'])
