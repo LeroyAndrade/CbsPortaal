@@ -1,3 +1,10 @@
+### Live demo
+> https://cbsportaal.onrender.com/articles
+
+
+
+
+
 # Eerste keer setup (EENMALIG)
 
 > python3.14 -m venv macenv
