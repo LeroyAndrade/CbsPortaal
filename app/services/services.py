@@ -96,9 +96,14 @@ class UserLog:
             # Tijd van server
             logged_at = datetime.now(UTC)
 
-        user.logs.append(
-            UserLogging(useracties=actie, logged_at=logged_at)
-        )
+        log_entry = UserLogging(useracties=actie, logged_at=logged_at)
+        user.logs.append(log_entry)
+
+        db.session.add(log_entry)
+        db.session.commit()
+        db.session.flush()
+
+
 
 
 class SlaArtikelOp:

@@ -2,27 +2,41 @@
 > https://cbsportaal.onrender.com
 
 
+# installeren
 
 
+## Eerste keer setup (EENMALIG)
 
-# Eerste keer setup (EENMALIG)
-
-> python3.14 -m venv macenv
+> python3.14 -m venv env
 >
-> source macenv/bin/activate
+> source env/bin/activate
 > 
 > pip install -r requirements.txt
 
 > docker compose up --build -d
+> 
+> docker compose exec app flask db upgrade
+
+>> open url localhost docker url en registreer je (via de login pagina)
+>>> log de user in
+
+> in je IDE terminal:
+>> docker exec -it cbs_portal_db psql -U cbs -d cbs_portal
+>> select * from userlogging;
+Hier wordt de logging getoond van desbetreffende persoon.
+> Dit kan worden uitgebreid met 
+
+## Vanaf dit punt stopt de demo
+
+### [//]: # Hierna volgen commands die ik als shortcuts gebruik, ni
 
 # Migraties eerste keer
 
 [//]: # (flask db migrate -m "migratie tekst") - niet in gebruik
 > docker compose exec app flask db init
-> 
 > docker compose exec app flask db migrate -m "initial migration"
-> 
 > docker compose exec app flask db upgrade
+> docker compose up
 
 # NORMAAL STARTEN
 > docker compose up -d

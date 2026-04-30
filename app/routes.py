@@ -135,7 +135,7 @@ def register():
             db.session.add(new_user)
             db.session.commit()
 
-    # UserLog.log_action(user, "Registratie succesvol")
+            # UserLog.log_action(user, "Registratie succesvol")
 
             flash('Account aangemaakt, u kunt nu inloggen', 'success')
             return redirect(url_for('cbs.login'))
