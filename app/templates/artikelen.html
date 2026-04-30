@@ -93,13 +93,19 @@
 
                   <!-- Recente Artikelen -->
                   <div class="card">
-                    <h3 class="purple">Recente Artikelen</h3>
+                    <h3 class="purple">Recente onderwerpen:</h3>
                     {% for a in recent_articles %}
                       <p>{{ a.get('Title') or 'Geen titel' }}</p>
                     {% endfor %}
                   </div>
                 </div>
             </div>
+        <!--        Artikelen van dropdown-->
+            <div id="result">
+
+
+            </div>
+
 
 
             <!-- Knop Haal data op van db-->
@@ -129,7 +135,15 @@
                 </tr>
                 {% endfor %}
             </table>
-    <!--        <div id="result"></div>-->
+
+
+
+
+
+
+
+
+
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
