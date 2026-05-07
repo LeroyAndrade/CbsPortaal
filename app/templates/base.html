@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}
+                CBS Portal
+            {% endblock %}
+        </title>
+
+        <style>
+            body { font-family: Arial, sans-serif; margin: 40px; }
+            .article {
+                margin-bottom: 25px;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        {% block extra_CSS %}
+        {% endblock %}
+
+    </head>
+
+        <body>
+
+              {% include "blocks/menu.html" %}
+
+            <main>
+                {% block content %}
+                {% endblock %}
+
+            </main>
+
+        </body>
+
+</html>

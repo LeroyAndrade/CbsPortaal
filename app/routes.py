@@ -7,20 +7,26 @@ from flask_login import logout_user, login_user, login_required, current_user
 from typing import List
 
 # Eigen imports
-from app.services.services import ArticleService, DatasetDropdownService, CbsDataService, UserLog, SlaArtikelOp
+from app.services.services import ArticleService, DatasetDropdownService, CbsDataService, UserLog, SlaArtikelOp, OnlineUsers
 from app.models.user import User, UserLogging, CBSArticle
 from app.extensions.db import db
 
-bp = Blueprint('cbs', __name__)
+bp = Blueprint('cbs', __name__,
+               template_folder="templates",
+               static_folder="static")
 
 @bp.route("/")
 def index():
     return redirect(url_for('cbs.articles'))
 
 
+@bp.route("/dashboard")
+def dashboard():
+    onlineusers=OnlineUsers.get_online_users()
+    return render_template("/dashboard/dash.html", onlineusers=onlineusers)
 
 @bp.route("/articles")
-@login_required
+# @login_required
 def articles():
     body_text = ArticleService.get_latest_cbs_article()
     body_dropdown = DatasetDropdownService.get_datasets()
@@ -30,7 +36,7 @@ def articles():
 
     # Debug info -delete me
     logging.debug(body_text)
-    return render_template('artikelen.html',
+    return render_template('/articles/artikelen.html',
                            articles=body_text,
                            dropdown=body_dropdown,
                            current = current_user,

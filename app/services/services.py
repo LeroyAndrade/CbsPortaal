@@ -142,3 +142,10 @@ class SlaArtikelOp:
             print(f"SUCCES → {added} artikelen opgeslagen")
         else:
             print("Niets nieuws om op te slaan")
+
+
+class OnlineUsers:
+    @staticmethod
+    def get_online_users():
+        loggedin = User.query.all()
+        return loggedin
