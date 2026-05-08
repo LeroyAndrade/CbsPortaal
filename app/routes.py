@@ -21,16 +21,19 @@ def index():
 
 
 @bp.route("/dashboard")
+@login_required
 def dashboard():
     onlineusers=OnlineUsers.get_online_users()
 
+    UserLog.log_action(current_user, "Dashboard pagina bezocht")
     return render_template("/dashboard/dash.html",
                            onlineusers=onlineusers,
                            current_user=current_user.username,
                            current_time=current_user.last_logged_in)
 
+# 5034
 @bp.route("/articles")
-# @login_required
+@login_required
 def articles():
     body_text = ArticleService.get_latest_cbs_article()
     body_dropdown = DatasetDropdownService.get_datasets()
@@ -39,8 +42,10 @@ def articles():
     artikelGet10 = CBSArticle.query.order_by(CBSArticle.fetched_at.desc()).limit(10).all()
 
 
-    # Debug info -delete me
+    UserLog.log_action(current_user, "Articles pagina bezocht")
+# Debug info -delete me
     logging.debug(body_text)
+
     return render_template("/articles/artikelen.html",
                            articles=body_text,
                            dropdown=body_dropdown,
@@ -51,6 +56,7 @@ def articles():
 
 
 @bp.route("/cbs/data")
+@login_required
 def cbs_data():
     dataset = request.args.get("dataset")
 
@@ -63,13 +69,13 @@ def cbs_data():
         return jsonify({"error": "Ongeldige dataset"}), 400
 
     data = CbsDataService.get_data(dataset)
-
     return jsonify(data)
 
 sla_artikel_op = SlaArtikelOp()
 
 
 @bp.route('/fetch', methods=['POST'])
+@login_required
 def fetch_and_save():
     try:
         # Direct de list doorgeven
@@ -95,16 +101,16 @@ def login():
 
         # als je al bent ingelogd en opnieuw inlogt via het formulier, ga naar homepagina
         if current_user.is_authenticated:
+            UserLog.log_action(current_user, "Ingelogd, redirecten naar main pagina")
             return redirect(url_for('cbs.index'))
 
         if user:
             if user.check_password(password):
                 # logging
-                UserLog.log_action(user, "Ingelogd")
+                UserLog.log_action(current_user, "Ingelogd")
                 session['logged_in'] = True
                 session['user'] = username
 
-                # todo, ook deze tijd van de server halen
                 user.last_logged_in = datetime.now(UTC)
                 db.session.commit()
                 db.session.flush()
@@ -112,8 +118,10 @@ def login():
                 login_user(user)
                 return redirect(url_for('cbs.articles'))
             else:
+                UserLog.log_action(current_user, "Bijzonder: Foutief ingelogd")
                 flash('Login niet succesvol', 'error')
         else:
+            UserLog.log_action(current_user, "Bijzonder: Foutief ingelogd")
             flash('Login niet succesvol', 'error')
 
         # als je al bent ingelogd en willekeurig naar de pagina toe gaat
@@ -140,13 +148,13 @@ def register():
         if user:
             flash('Gebruikersnaam bestaat al', 'error')
             # todo add: IP
-            UserLog.log_action(user, "Registratie poging door een ander")
+            UserLog.log_action(user, f"Registratie poging, gekozen username: {user} is bezet")
         else:
             new_user = User(username=username, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
+            UserLog.log_action(new_user, f"Registratie poging voor nieuwe username: {username}")
             db.session.flush()
-            # UserLog.log_action(user, "Registratie succesvol")
 
             flash('Account aangemaakt, u kunt nu inloggen', 'success')
             return redirect(url_for('cbs.login'))
