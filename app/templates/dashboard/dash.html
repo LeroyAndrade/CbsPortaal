@@ -22,7 +22,7 @@
                   {% for log in user.logs %}
                <tr>
                     <td>{{ user.username }}</td>
-                    <td>{{ log.logged_at }}</td>
+                    <td>{{ log.logged_at|local_time  }}</td>
                     <td>{{ log.useracties }}</td>
                      </tr>
                   {% endfor %}

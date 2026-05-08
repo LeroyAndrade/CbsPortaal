@@ -1,7 +1,18 @@
 from flask import Flask
 from config import Config
+from zoneinfo import ZoneInfo
 
 from app.extensions import db, migrate, login_manager
+
+# Krijg echte tijd van de user voor in de logging (seizoen ongebonden)
+def local_time(dt):
+    if dt is None:
+        return ""
+
+    return dt.astimezone(
+        ZoneInfo("Europe/Amsterdam")
+    ).strftime("%d-%m-%Y %H:%M")
+
 
 def create_app():
     app = Flask(__name__)
@@ -17,7 +28,10 @@ def create_app():
         return db.session.get(User, int(user_id))
 
     from app.routes import bp
+    app.jinja_env.filters["local_time"] = local_time
     app.register_blueprint(bp)
+
+
 
     return app
 
