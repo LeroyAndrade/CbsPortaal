@@ -1,22 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
+{% extends "base.html" %}
+
+{% block title %}Artikelen{% endblock %}
+
+{% block extra_CSS %}
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+
+{% block main %}
+           <table>
+        <tr>
+            <th>Username</th>
+            <th>Tijd</th>
+            <th>Actie</th>
+        </tr>
+
+
+            {% for user in onlineusers %}
+
+                  {% for log in user.logs %}
+               <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ log.logged_at }}</td>
+                    <td>{{ log.useracties }}</td>
+                     </tr>
+                  {% endfor %}
+
+            {% endfor %}
+
+    </table>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block scripts %}
+    <!-- scripts -->
+{% endblock %}
 
 
 
-    <body>
-
-        {% for user in onlineusers %}
-            <p>{{ user.username }}</p>
-
-              {% for log in user.logs %}
-                <p>{{ log.useracties }}</p>
-              {% endfor %}
-
-        {% endfor %}
-
-    </body>
-</html>
