@@ -23,8 +23,11 @@ def index():
 @bp.route("/dashboard")
 def dashboard():
     onlineusers=OnlineUsers.get_online_users()
+
     return render_template("/dashboard/dash.html",
-                           onlineusers=onlineusers)
+                           onlineusers=onlineusers,
+                           current_user=current_user.username,
+                           current_time=current_user.last_logged_in)
 
 @bp.route("/articles")
 # @login_required

@@ -197,6 +197,10 @@ input[type='submit']{
       align-items: baseline;
     }
 
+    nav a{
+        text-decoration: underline;
+    }
+
     main{
      margin: 0 1dvw;
     }
