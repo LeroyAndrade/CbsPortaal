@@ -9,9 +9,14 @@
 
     <body>
 
-    {% for x in onlineusers %}
-        <p>{{ x.username }}</p>
-        <p>{{ x.type }}</p>
-    {% endfor %}
+        {% for user in onlineusers %}
+            <p>{{ user.username }}</p>
+
+              {% for log in user.logs %}
+                <p>{{ log.useracties }}</p>
+              {% endfor %}
+
+        {% endfor %}
+
     </body>
 </html>

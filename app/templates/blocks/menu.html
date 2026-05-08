@@ -1,56 +1,32 @@
-<aside class="sidebar">
-    <div class="flexSectorRow">
-<!---->
-        <div class="dashboard-container">
-
-          <!-- SIDEBAR -->
-          <aside class="sidebar">
+<section class="sectorMenu">
+        <aside class="sidebar">
             <div class="user-info">
-              <div class="avatar">
-                   <img src="{{ url_for('static', filename='images/cbs-logo-brand-nl.svg') }}" alt="CBS logo">
+                <div class="avatar">
+                    <img src="{{ url_for('static', filename='images/cbs-logo-brand-nl.svg') }}" alt="CBS logo">
+                </div>
 
-              </div>
-              <div>
-                <strong>Hi, {{ current_user }}</strong><br>
-                <small>Session: {{ current_time }}</small>
-              </div>
+                <div>
+                    <strong>Hi, {{ current_user }}</strong><br>
+                    <small>Session: {{ current_time }}</small>
+                </div>
             </div>
 
             <nav class="menu">
-              <a href="#" class="active"> Dashboard</a>
-              <a href="{{ url_for('cbs.dashboard') }}"> Overview</a>
-              <a href="#"> Analytics</a>
-              <a href="#"> Statistic</a>
-              <a href="#"> Settings</a>
-              <a href="#"> Support</a>
+                <a href="{{ url_for('cbs.dashboard') }}" class="active"> Dashboard</a>
+                <a href="#"> Overview</a>
+                <a href="#"> Analytics</a>
+                <a href="#"> Statistic</a>
+                <a href="#"> Settings</a>
+                <a href="#"> Support</a>
             </nav>
 
-              <a href="{{ url_for('cbs.logout') }}">
-                  <button class="logout">Log out</button>
-              </a>
+            <a href="{{ url_for('cbs.logout') }}">
+                <button class="logout">Log out</button>
+            </a>
+        </aside>
 
-          </aside>
+        <section class="userStats">
+              <div class="card">awserfg</div>
+        </section>
 
-
-            <main>
-                <div class="sectorA">
-
-                   <section class="Artikelen">
-                     {% for article in articles %}
-                          <article class="ArtikelenChild">
-                              <div class="ArtikelTitel"><h1 class="">{{ article.Title }}</h1></div>
-                                  <br>
-                                  <div><h2><b>Themes:</b>   {{article.Themes}}</h2> </div>
-                                  <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
-                                  <div class="taxonamy">Taxonomy: {{article.TaxonomyTags}}</div>
-                              <p class="ArtikelLeadText ruim">
-                                      {{ article.LeadText }}
-                                  </p>
-                          </article>
-                     {% endfor %}
-                   </section>
-                </div>
-            </main>
-        </div>
-
-</aside>
+</section>

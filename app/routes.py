@@ -23,7 +23,8 @@ def index():
 @bp.route("/dashboard")
 def dashboard():
     onlineusers=OnlineUsers.get_online_users()
-    return render_template("/dashboard/dash.html", onlineusers=onlineusers)
+    return render_template("/dashboard/dash.html",
+                           onlineusers=onlineusers)
 
 @bp.route("/articles")
 # @login_required
@@ -34,16 +35,16 @@ def articles():
     # formulier button, ophalen opgeslagen API data
     artikelGet10 = CBSArticle.query.order_by(CBSArticle.fetched_at.desc()).limit(10).all()
 
+
     # Debug info -delete me
     logging.debug(body_text)
-    return render_template('/articles/artikelen.html',
+    return render_template("/articles/artikelen.html",
                            articles=body_text,
                            dropdown=body_dropdown,
-                           current = current_user,
+                           current=current_user,
                            current_user=current_user.username,
-                           current_time = current_user.last_logged_in,
+                           current_time=current_user.last_logged_in,
                            artikelGet10=artikelGet10)
-
 
 
 @bp.route("/cbs/data")
@@ -103,6 +104,7 @@ def login():
                 # todo, ook deze tijd van de server halen
                 user.last_logged_in = datetime.now(UTC)
                 db.session.commit()
+                db.session.flush()
 
                 login_user(user)
                 return redirect(url_for('cbs.articles'))
@@ -140,7 +142,7 @@ def register():
             new_user = User(username=username, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
-
+            db.session.flush()
             # UserLog.log_action(user, "Registratie succesvol")
 
             flash('Account aangemaakt, u kunt nu inloggen', 'success')
