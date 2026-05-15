@@ -91,18 +91,26 @@ class CbsDataService:
 class UserLog:
 
     @staticmethod
-    def log_action(user : User, actie:str, logged_at: datetime | None = None):
+    def log_action(user: User | None, actie: str, logged_at: datetime | None = None):
+
         if logged_at is None:
-            # Tijd van server
             logged_at = datetime.now(UTC)
 
+        if user is None:
+            logging.warning(f"Geen user gevonden voor log: {actie}")
+            return
+
+        if hasattr(user, "logs") != True:
+            logging.warning(f"User heeft geen logs relatie: {actie}")
+            return
+
         log_entry = UserLogging(useracties=actie, logged_at=logged_at)
+
         user.logs.append(log_entry)
 
         db.session.add(log_entry)
         db.session.commit()
         db.session.flush()
-
 
 
 

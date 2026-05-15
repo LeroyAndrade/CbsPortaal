@@ -107,7 +107,7 @@ def login():
         if user:
             if user.check_password(password):
                 # logging
-                UserLog.log_action(current_user, "Ingelogd")
+                UserLog.log_action(user, "Ingelogd")
                 session['logged_in'] = True
                 session['user'] = username
 
