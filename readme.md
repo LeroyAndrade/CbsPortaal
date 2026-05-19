@@ -1,3 +1,6 @@
+## Logboek/dashboard pagina toegevoegd
+### https://cbsportaal.onrender.com/login?next=%2Farticles
+
 # installeren
 ## Eerste keer setup (EENMALIG)
 
