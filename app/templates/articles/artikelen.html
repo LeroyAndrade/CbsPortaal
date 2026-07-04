@@ -2,6 +2,10 @@
 
 {% block title %}Artikelen{% endblock %}
 
+{% block extra_CSS %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
 {% block main %}
 <div class="sectorA">
     <section class="Artikelen">
@@ -26,9 +30,7 @@
         {% endfor %}
     </section>
 </div>
-{% endblock %}
 
-{% block content %}
 <br><br>
 
 <section class="dropdown">
@@ -90,13 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const datasetSelect = document.getElementById('datasetSelect');
     const resultDiv = document.getElementById('result');
 
+    const cbsDataUrl = "{{ url_for('cbs.cbs_data') }}";
+
     async function loadData() {
         const dataset = datasetSelect.value || 'Articles';
 
-        resultDiv.innerHTML = '<p>Laden...</p>';
+        resultDiv.innerHTML = '<p>Laden data vanuit CBS API, een ogenblik geduld alstublieft...</p>';
 
         try {
-            const response = await fetch(`/cbs/data?dataset=${dataset}`);
+            const response = await fetch(`${cbsDataUrl}?dataset=${encodeURIComponent(dataset)}`);
 
             if (!response.ok) {
                 throw new Error(`Netwerk fout: ${response.status}`);

@@ -45,14 +45,19 @@ def articles():
     UserLog.log_action(current_user, "Articles pagina bezocht")
 # Debug info -delete me
     logging.debug(body_text)
+    articles_count = len(body_text)
+    recent_articles = body_text[:5]
 
     return render_template("/articles/artikelen.html",
                            articles=body_text,
                            dropdown=body_dropdown,
+                           articles_count=articles_count,
+                           recent_articles=recent_articles,
                            current=current_user,
                            current_user=current_user.username,
                            current_time=current_user.last_logged_in,
                            artikelGet10=artikelGet10)
+
 
 
 @bp.route("/cbs/data")
@@ -108,14 +113,13 @@ def login():
             if user.check_password(password):
                 # logging
                 UserLog.log_action(user, "Ingelogd")
-                session['logged_in'] = True
-                session['user'] = username
+                login_user(user)
+                # session['user'] = username
 
                 user.last_logged_in = datetime.now(UTC)
                 db.session.commit()
-                db.session.flush()
+                db.session.refresh(user)
 
-                login_user(user)
                 return redirect(url_for('cbs.articles'))
             else:
                 UserLog.log_action(current_user, "Bijzonder: Foutief ingelogd")
@@ -172,3 +176,9 @@ def logout():
     session.pop('user', None)
     flash('U bent uitgelogd', 'success')
     return redirect(url_for('cbs.login'))
+
+
+
+@bp.route('/opslagApi')
+def opslagApi():
+    return render_template('opslagApi.html')

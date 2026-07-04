@@ -110,11 +110,12 @@ h1, .ArtikelTitel, .ArtikelLeadText{
 /*Dropdown kaarten*/
 .cbs-grid {
     display: flex;
-    width: 90dvw;
+    /*width: 90dvw;*/
     flex-wrap: wrap;
     gap: 1rem;
     /*margin-top: 1rem;*/
     margin: 0 auto;
+    padding: 1em;
 }
 
 .cbs-card {
