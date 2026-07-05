@@ -17,7 +17,7 @@ bp = Blueprint('cbs', __name__,
 
 @bp.route("/")
 def index():
-    return redirect(url_for('cbs.articles'))
+    return redirect(url_for('cbs.dashboard'))
 
 
 @bp.route("/dashboard")

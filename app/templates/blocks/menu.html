@@ -12,12 +12,12 @@
             </div>
 
             <nav class="menu">
-                <a href="{{ url_for('cbs.index') }}"> Overview</a>
                 <a href="{{ url_for('cbs.dashboard') }}" class="active"> Dashboard</a>
                 <a href="{{ url_for('cbs.articles') }}"> Artikelen</a>
                 <a href="{{ url_for('cbs.opslagApi') }}"> API to DB</a>
-                <a href="#"> Settings</a>
-                <a href="#"> Support</a>
+                <a href="#" style="text-decoration: none"> Settings</a>
+                <a href="#" style="text-decoration: none; color:"#000000";> Support</a>
+                            style="text-decoration: none; color: #000000;"
             </nav>
 
             <a href="{{ url_for('cbs.logout') }}">

@@ -7,13 +7,14 @@
 {% endblock %}
 
 {% block main %}
-<form method="POST" action="{{ url_for('cbs.fetch_and_save') }}">
-    <button type="submit">Haal data op</button>
-</form>
 
 <br>
 
 <h3>Laatst opgeslagen artikelen</h3>
+
+<form method="POST" action="{{ url_for('cbs.fetch_and_save') }}">
+    <button type="submit">Haal data op</button>
+</form>
 
 <table border="1" cellpadding="8">
     <tr>
@@ -35,73 +36,6 @@
     {% endfor %}
 </table>
 
-<section class="dropdown">
-    <select id="datasetSelect">
-        {% for dd in dropdown %}
-            <option value="{{ dd }}">{{ dd }}</option>
-        {% endfor %}
-    </select>
-</section>
 
 <div id="result"></div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const datasetSelect = document.getElementById('datasetSelect');
-    const resultDiv = document.getElementById('result');
-
-    const cbsDataUrl = "{{ url_for('cbs.cbs_data') }}";
-
-    async function loadData() {
-        const dataset = datasetSelect.value || 'Articles';
-
-        resultDiv.innerHTML = '<p>Laden data vanuit CBS API, een ogenblik geduld alstublieft...</p>';
-
-        try {
-            const response = await fetch(`${cbsDataUrl}?dataset=${encodeURIComponent(dataset)}`);
-
-            if (!response.ok) {
-                throw new Error(`Netwerk fout: ${response.status}`);
-            }
-
-            const items = await response.json();
-
-            if (!items || items.length === 0) {
-                resultDiv.innerHTML = '<p>Geen resultaten gevonden.</p>';
-                return;
-            }
-
-            resultDiv.innerHTML = renderCards(items.slice(0, 10));
-        } catch (error) {
-            console.error(error);
-            resultDiv.innerHTML = '<p class="error">Kon data niet ophalen. Probeer het later opnieuw.</p>';
-        }
-    }
-
-    function renderCards(items) {
-        const cards = items.map((item) => {
-            const title = item.Title || item.Name || 'Geen titel';
-            const description = item.LeadText || item.Description || '';
-            const link = item.Url
-                ? `<a href="${item.Url}" target="_blank">Lees meer</a>`
-                : '';
-
-            return `
-                <article class="cbs-card">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                    ${link}
-                </article>
-            `;
-        }).join('');
-
-        return `<div class="cbs-grid">${cards}</div>`;
-    }
-
-    loadData();
-    datasetSelect.addEventListener('change', loadData);
-});
-</script>
 {% endblock %}
