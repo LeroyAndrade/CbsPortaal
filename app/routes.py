@@ -180,5 +180,22 @@ def logout():
 
 
 @bp.route('/opslagApi')
+@login_required
 def opslagApi():
-    return render_template('opslagApi.html')
+    body_text = ArticleService.get_latest_cbs_article()
+    body_dropdown = DatasetDropdownService.get_datasets()
+    # formulier button, ophalen opgeslagen API data
+    artikelGet10 = CBSArticle.query.order_by(CBSArticle.fetched_at.desc()).limit(10).all()
+    articles_count = len(body_text)
+    recent_articles = body_text[:5]
+
+    UserLog.log_action(current_user, "Opslag API pagina bezocht")
+    return render_template('articles/opslagApi/opslagApi.html',
+                           articles=body_text,
+                           artikelGet10=artikelGet10,
+                           dropdown=body_dropdown,
+                           recent_articles=recent_articles,
+                           articles_count=articles_count,
+                           current=current_user,
+                           current_user=current_user.username,
+                           current_time=current_user.last_logged_in)

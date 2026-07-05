@@ -1,37 +1,39 @@
 {% extends "base.html" %}
 
-{% block title %}Artikelen{% endblock %}
+{% block title %}Opslag API{% endblock %}
 
 {% block extra_CSS %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {% endblock %}
 
 {% block main %}
-<div class="sectorA">
-    <section class="Artikelen">
-        {% for article in articles %}
-            <article class="ArtikelenChild">
-                <div class="ArtikelTitel">
-                    <h1>{{ article.Title }}</h1>
-                </div>
+<form method="POST" action="{{ url_for('cbs.fetch_and_save') }}">
+    <button type="submit">Haal data op</button>
+</form>
 
-                <h2><b>Themes:</b> {{ article.Themes }}</h2>
+<br>
 
-                <img src="{{ article.Image }}" alt="{{ article.ImageAlt }}">
+<h3>Laatst opgeslagen artikelen</h3>
 
-                <div class="taxonamy">
-                    Taxonomy: {{ article.TaxonomyTags }}
-                </div>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Titel</th>
+        <th>Datum</th>
+        <th>Samenvatting</th>
+        <th>Link</th>
+    </tr>
 
-                <p class="ArtikelLeadText ruim">
-                    {{ article.LeadText }}
-                </p>
-            </article>
-        {% endfor %}
-    </section>
-</div>
-
-<br><br>
+    {% for article in artikelGet10 %}
+        <tr>
+            <td>{{ article.title }}</td>
+            <td>{{ article.release_time if article.release_time else '' }}</td>
+            <td>{{ article.summary[:120] }}...</td>
+            <td>
+                <a href="{{ article.url }}" target="_blank">lees meer</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
 
 <section class="dropdown">
     <select id="datasetSelect">
@@ -41,49 +43,7 @@
     </select>
 </section>
 
-<div class="grid">
-    <div class="card">
-        <h3>Artikelen</h3>
-<!--        <div class="circle">{{ articles_count }}</div>-->
-    </div>
-
-    <div class="card">
-        <h3 class="purple">Recente onderwerpen:</h3>
-        {% for article in recent_articles %}
-            <p>{{ article.get('Title') or 'Geen titel' }}</p>
-        {% endfor %}
-    </div>
-</div>
-
 <div id="result"></div>
-
-<!--<form method="POST" action="{{ url_for('cbs.fetch_and_save') }}">-->
-<!--    <button type="submit">Haal data op</button>-->
-<!--</form>-->
-
-<br>
-
-<!--<h3>Laatst opgeslagen artikelen</h3>-->
-
-<!--<table border="1" cellpadding="8">-->
-<!--    <tr>-->
-<!--        <th>Titel</th>-->
-<!--        <th>Datum</th>-->
-<!--        <th>Samenvatting</th>-->
-<!--        <th>Link</th>-->
-<!--    </tr>-->
-
-<!--    {% for article in artikelGet10 %}-->
-<!--        <tr>-->
-<!--            <td>{{ article.title }}</td>-->
-<!--            <td>{{ article.release_time if article.release_time else '' }}</td>-->
-<!--            <td>{{ article.summary[:120] }}...</td>-->
-<!--            <td>-->
-<!--                <a href="{{ article.url }}" target="_blank">lees meer</a>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    {% endfor %}-->
-<!--</table>-->
 {% endblock %}
 
 {% block scripts %}
@@ -97,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadData() {
         const dataset = datasetSelect.value || 'Articles';
 
-        resultDiv.innerHTML = '<p>Laden vanuit CBS API, wachtend op de que, een ogenblik geduld alstublieft...</p>';
+        resultDiv.innerHTML = '<p>Laden data vanuit CBS API, een ogenblik geduld alstublieft...</p>';
 
         try {
             const response = await fetch(`${cbsDataUrl}?dataset=${encodeURIComponent(dataset)}`);
