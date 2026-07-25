@@ -1,3 +1,5 @@
+[//]: # (Een functie waarin ik de user zie en een userrole aan kan geven
+
 ## Logboek/dashboard pagina toegevoegd
 ### https://cbsportaal.onrender.com/login?next=%2Farticles
 
