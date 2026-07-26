@@ -16,7 +16,6 @@ iam_blueprint: Blueprint = Blueprint(
     url_prefix="/iam",
 )
 
-
 # Deze import staat bewust onder de Blueprint.
 #
 # iam_routes.py importeert namelijk iam_blueprint uit dit bestand.

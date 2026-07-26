@@ -15,3 +15,4 @@ class CbsRecord(db.Model):
     dataset_name = db.Column(db.String(100), nullable=False)
     raw_data = db.Column(db.JSON, nullable=False)
     fetched_at = db.Column(db.DateTime, nullable=False)
+

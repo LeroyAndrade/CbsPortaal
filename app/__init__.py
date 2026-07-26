@@ -3,6 +3,8 @@ from config import Config
 from zoneinfo import ZoneInfo
 
 from app.extensions import db, migrate, login_manager
+from app.iam import iam_blueprint
+
 
 # Krijg echte tijd van de user voor in de logging (seizoen ongebonden)
 def local_time(dt):
@@ -32,6 +34,8 @@ def create_app():
     app.register_blueprint(bp)
 
 
+    # Registreer IAM-blueprint.
+    app.register_blueprint(iam_blueprint)
 
     return app
 

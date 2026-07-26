@@ -92,4 +92,6 @@ Hier wordt de logging getoond van desbetreffende persoon.
 # Haal die feature op
 > git fetch origin
 > git checkout feature_cbs-data-opslag
->
+
+# Check all routes
+>s docker compose exec app flask routes
