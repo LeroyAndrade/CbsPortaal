@@ -13,7 +13,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(300), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False, index=True)
-    created_at = db.Column(db.DateTime, default=datetime.now(UTC), nullable=False)
+    # Rol van de gebruiker, Nieuwe gebruikers krijgen standaard de rol 'user'.
+    role = db.Column(db.String(50), nullable=False, default="user")
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(UTC), nullable=False)
     last_logged_in = db.Column(db.DateTime, nullable=True)
 
     logs = db.relationship('UserLogging', back_populates='user', lazy=True)
@@ -21,10 +23,11 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return str(self.user_id)
 
-    def __init__(self, username, email, password=None):
+    def __init__(self, username: str, email: str, password: str = None, role: str = "user"):
 
         self.username = username
         self.email = email
+        self.role = role
 
         if password:
             self.set_password(password)
