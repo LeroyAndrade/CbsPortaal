@@ -16,8 +16,11 @@
 > 
 > docker compose exec app flask db upgrade
 
->> open url localhost docker url en registreer je (via de login pagina)
->>> log de user in
+> maak admin aan
+>> docker compose exec app python -m app.scripts.runMeOnce
+
+> Run it 
+>> open url localhost docker url en registreer je (via de login pagina), log de user in
 
 > in je IDE terminal:
 >> docker exec -it cbs_portal_db psql -U cbs -d cbs_portal
@@ -34,7 +37,7 @@ Hier wordt de logging getoond van desbetreffende persoon.
 [//]: # (flask db migrate -m "migratie tekst") - niet in gebruik
 > docker compose exec app flask db init
 > docker compose exec app flask db migrate -m "initial migration"
-> docker compose exec app flask db upgrade
+
 > docker compose up
 
 # NORMAAL STARTEN
