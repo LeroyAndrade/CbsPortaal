@@ -7,5 +7,4 @@ bestaat zodra de IAM-module wordt geladen.
 Alembic gebruikt deze metadata tijdens het maken van migraties.
 """
 
-from app.iam.models.iam_provisioning_event import IamProvisioningEvent
-
+from app.iam.models.iam_provisioning_event import IAMProvisioningEvent
