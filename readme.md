@@ -36,8 +36,8 @@ Hier wordt de logging getoond van desbetreffende persoon.
 
 [//]: # (flask db migrate -m "migratie tekst") - niet in gebruik
 > docker compose exec app flask db init
-> docker compose exec app flask db migrate -m "initial migration"
-
+> docker compose exec app flask db migrate -m "je migratie tekst"
+> flask db migrate -m "Voeg IAM provisioning events toe"
 > docker compose up
 
 # NORMAAL STARTEN
@@ -54,7 +54,9 @@ Hier wordt de logging getoond van desbetreffende persoon.
 # MIGRATIES (tijdens ontwikkeling)
 > docker compose exec app flask db migrate -m "jouw bericht"
 > docker compose exec app flask db upgrade
+> docker compose exec app flask db current
 > docker compose restart app
+> 
 
 
 # FULL RESET (alles weg, begin opnieuw)
