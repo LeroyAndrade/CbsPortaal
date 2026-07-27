@@ -8,7 +8,6 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from app.extensions.db import db
 from app.models.user import User
 
-
 class IAMProvisioningError(Exception):
     """
     Fout die tijdens IAM-provisioning kan ontstaan.
@@ -51,8 +50,11 @@ class IAMProvisioningService:
         Een lijst met meerdere gebruikers wordt ook ondersteund.
         """
 
+#000  JSON verwerken
         users_data = cls._parse_source_data(source_data)
 
+
+# 010 Teller voor rapportage
         created_count = 0
         updated_count = 0
 
@@ -61,15 +63,20 @@ class IAMProvisioningService:
                 users_data,
                 start=1,
             ):
+
+# 020 Valideer gebruiker
                 user_data = cls._validate_user_data(
                     user_data=raw_user_data,
                     position=position,
                 )
 
+#003 Bestaande gebruiker zoeken
                 existing_user = cls._find_user_by_email(
                     email=user_data["email"],
                 )
 
+
+#004 Nieuwe gebruiker of bestaande gebruiker bijwerken
                 if existing_user is None:
                     cls._create_user(
                         user_data=user_data,
@@ -97,6 +104,8 @@ class IAMProvisioningService:
             # De volledige invoer wordt als één transactie opgeslagen.
             #
             # Als één gebruiker mislukt, wordt niets opgeslagen.
+
+#005
             db.session.commit()
 
         except IAMProvisioningError:
@@ -124,6 +133,8 @@ class IAMProvisioningService:
             "total": len(users_data),
         }
 
+
+#011
     @staticmethod
     def _parse_source_data(
         source_data: str,

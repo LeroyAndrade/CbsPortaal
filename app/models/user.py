@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return str(self.user_id)
 
-    def __init__(self, username: str, email: str, password: str = None, role: str = "user"):
+    def __init__(self, username: str, email: str, password: str, role: str = "user"):
 
         if role not in self.VALID_ROLES:
             raise ValueError(f"Ongeldige rol: {role}")
@@ -33,9 +33,7 @@ class User(db.Model, UserMixin):
         self.username = username
         self.email = email
         self.role = role
-
-        if password:
-            self.set_password(password)
+        self.set_password(password)
 
 
     def set_password(self, password):

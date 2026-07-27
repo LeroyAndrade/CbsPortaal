@@ -100,12 +100,3 @@ Hier wordt de logging getoond van desbetreffende persoon.
 > 
 > development
 > BEGIN;  DELETE FROM userlogging WHERE user_id = 1;  DELETE FROM users WHERE user_id = 1;  COMMIT;
-> 
-> 
-> 
-{
-    "username": "Leroy.Andrade",
-    "email": "Leroy.Andrade@jio.nl",
-    "password": "SterkWachtwoord123!",
-    "role": "admin"
-}

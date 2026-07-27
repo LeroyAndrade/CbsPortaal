@@ -32,6 +32,12 @@ def iam_index() -> Response | str:
             description="Je hebt geen toegang tot de IAM-module.",
         )
 
+    if current_user.role != "admin":
+        abort(
+            403,
+            description="U heeft onvoldoende rechten, neem contact op met de beheerder."
+        )
+
     # Maak het provisioningformulier aan.
     form = IAMProvisioningForm()
 

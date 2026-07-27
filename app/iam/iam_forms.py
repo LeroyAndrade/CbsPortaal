@@ -7,21 +7,19 @@ from wtforms.validators import DataRequired, Length
 
 class IAMProvisioningForm(FlaskForm):
     """
-    Formulier voor het handmatig starten van IAM provisioning.
-
-    De beheerder plakt een JSON-lijst met gebruikers in het tekstveld.
-
     Voorbeeld:
 
     [
         {
-            "username": "Leroy",
+            "username": "Leroy.Andrade",
             "email": "Leroy.Andrade@jio.nl",
+            "password": "SterkWachtwoord123!",
             "role": "admin"
         },
         {
-            "username": "Jan",
-            "email": "jan@jio.nl",
+            "username": "Pietje.Puk",
+            "email": "Pietje.Puk@jio.nl",
+            "password": "SterkWachtwoord1234!",
             "role": "user"
         }
     ]
