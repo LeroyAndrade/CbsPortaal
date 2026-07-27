@@ -1,4 +1,3 @@
-
 # python -m app.scripts.runMeOnce
 """Maak éénmalig de eerste administrator aan."""
 
@@ -10,7 +9,7 @@ from app.models.user import User
 
 
 def create_admin() -> None:
-    """Maak eerste administrator aan."""
+    """Maak de eerste administrator aan."""
 
     app = create_app()
 
@@ -24,7 +23,21 @@ def create_admin() -> None:
 
         username: str = input("Gebruikersnaam: ").strip()
         email: str = input("E-mailadres: ").strip().lower()
-        password: str = getpass("Wachtwoord: ")
+
+        # Vraag het wachtwoord op totdat het geldig is.
+        while True:
+            password: str = getpass("Wachtwoord: ")
+            password_confirm: str = getpass("Herhaal wachtwoord: ")
+
+            if password != password_confirm:
+                print("❌ De wachtwoorden komen niet overeen. Probeer opnieuw.\n")
+                continue
+
+            if len(password) < 12:
+                print("❌ Het wachtwoord moet minimaal 12 tekens bevatten.\n")
+                continue
+
+            break
 
         # Maak de administrator aan.
         admin: User = User(
@@ -37,8 +50,11 @@ def create_admin() -> None:
         db.session.add(admin)
         db.session.commit()
 
+        db.session.refresh(admin)
+
         print()
-        print(f"Administrator '{username}' is succesvol aangemaakt.")
+        print(f"Administrator '{admin.username}' is succesvol aangemaakt.")
+        print(f"Rol: {admin.role}")
 
 
 if __name__ == "__main__":

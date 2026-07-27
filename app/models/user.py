@@ -9,6 +9,8 @@ from datetime import datetime, UTC
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
+    VALID_ROLES = {"user", "admin"}
+
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     username = db.Column(db.String(80), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(300), nullable=False)
@@ -25,12 +27,16 @@ class User(db.Model, UserMixin):
 
     def __init__(self, username: str, email: str, password: str = None, role: str = "user"):
 
+        if role not in self.VALID_ROLES:
+            raise ValueError(f"Ongeldige rol: {role}")
+
         self.username = username
         self.email = email
         self.role = role
 
         if password:
             self.set_password(password)
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

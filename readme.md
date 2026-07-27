@@ -24,7 +24,7 @@
 
 > in je IDE terminal:
 >> docker exec -it cbs_portal_db psql -U cbs -d cbs_portal
->> select * from userlogging;
+>> SELECT * FROM userlogging;
 Hier wordt de logging getoond van desbetreffende persoon.
 > Dit kan worden uitgebreid met 
 
@@ -97,3 +97,6 @@ Hier wordt de logging getoond van desbetreffende persoon.
 
 # Check all routes
 >s docker compose exec app flask routes
+> 
+> development
+> BEGIN;  DELETE FROM userlogging WHERE user_id = 1;  DELETE FROM users WHERE user_id = 1;  COMMIT;

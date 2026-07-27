@@ -157,3 +157,10 @@ class OnlineUsers:
     def get_online_users():
         loggedin = User.query.all()
         return loggedin
+
+
+class UserRole:
+    @staticmethod
+    def get_user_role():
+        userRole = User.query.all()
+        return userRole

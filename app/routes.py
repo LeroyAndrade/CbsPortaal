@@ -25,6 +25,7 @@ def index():
 def dashboard():
     onlineusers=OnlineUsers.get_online_users()
 
+
     UserLog.log_action(current_user, "Dashboard pagina bezocht")
     return render_template("/dashboard/dash.html",
                            onlineusers=onlineusers,
