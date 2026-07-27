@@ -1,10 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+
+{% block title %}
+    IAM-beheer
+{% endblock %}
+
+
+{% block main %}
+
+    <section class="iam-page">
+
+        <header class="iam-header">
+
+            <h1>Identity &amp; Access Management</h1>
+
+            <p>
+                Beheer gebruikers en verwerk IAM-provisioninggegevens.
+            </p>
+
+        </header>
+
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+
+            {% if messages %}
+
+                <section class="iam-messages">
+
+                    {% for category, message in messages %}
+
+                        <div class="iam-message iam-message-{{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <section class="iam-provisioning">
+
+            <h2>Provisioning</h2>
+
+            <p>
+                Plak hieronder een JSON-lijst met gebruikersgegevens.
+            </p>
+
+
+            <form method="POST">
+
+                {#
+                    hidden_tag bevat onder andere het CSRF-token
+                    van Flask-WTF.
+                #}
+                {{ form.hidden_tag() }}
+
+
+                <div class="form-group">
+
+                    {{ form.source_data.label }}
+
+                    {#
+                        De placeholder, het aantal regels en spellcheck
+                        worden al ingesteld via render_kw in het formulier.
+                    #}
+                    {{ form.source_data() }}
+
+
+                    {% if form.source_data.errors %}
+
+                        <div class="form-errors">
+
+                            {% for error in form.source_data.errors %}
+
+                                <p>{{ error }}</p>
+
+                            {% endfor %}
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    {{ form.submit() }}
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <section class="iam-users">
+
+            <header class="iam-users-header">
+
+                <h2>Gebruikers</h2>
+
+                <p>
+                    Aantal gebruikers: {{ users|length }}
+                </p>
+
+            </header>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Gebruikersnaam</th>
+                            <th>E-mailadres</th>
+                            <th>Rol</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for user in users %}
+
+                            <tr>
+
+                                <td>
+                                  {{ user.user_id }}
+                                </td>
+
+                                <td>
+                                    {{ user.username }}
+                                </td>
+
+                                <td>
+                                    {{ user.email }}
+                                </td>
+
+                                <td>
+                                    {{ user.role }}
+                                </td>
+
+                            </tr>
+
+                        {% else %}
+
+                            <tr>
+
+                                <td colspan="4">
+                                    Er zijn nog geen gebruikers gevonden.
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </section>
+
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}

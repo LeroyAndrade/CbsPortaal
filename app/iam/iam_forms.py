@@ -50,7 +50,7 @@ class IAMProvisioningForm(FlaskForm):
                 '[\n'
                 '    {\n'
                 '        "username": "Leroy",\n'
-                '        "email": Leroy.Andrade@jio.nl",\n'
+                '        "email": "Leroy.Andrade@jio.nl",\n'
                 '        "role": "admin"\n'
                 '    }\n'
                 ']'
@@ -60,6 +60,7 @@ class IAMProvisioningForm(FlaskForm):
         },
     )
 
-    submit = SubmitField(
+    submit = not SubmitField(
         "Start IAM synchronisatie",
     )
+
