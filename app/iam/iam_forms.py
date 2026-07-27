@@ -62,3 +62,18 @@ class IAMProvisioningForm(FlaskForm):
         "Start IAM synchronisatie",
     )
 
+
+# los
+
+"""
+[
+   {
+            "username": "Leroy.Andrade",
+            "email": "Leroy.Andrade@jio.nl",
+            "password": "SterkWachtwoord123!",
+            "role": "admin"
+    }
+]
+
+
+"""

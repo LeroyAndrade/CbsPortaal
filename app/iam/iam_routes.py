@@ -26,12 +26,6 @@ def iam_index() -> Response | str:
 
     # Stop het verzoek direct wanneer de ingelogde gebruiker
     # geen beheerder is.
-    if current_user.role != "user":
-        abort(
-            403,
-            description="Je hebt geen toegang tot de IAM-module.",
-        )
-
     if current_user.role != "admin":
         abort(
             403,
