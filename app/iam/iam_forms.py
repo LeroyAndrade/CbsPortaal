@@ -41,8 +41,8 @@ class IAMProvisioningForm(FlaskForm):
                 message="Voer gebruikersdata in.",
             ),
             Length(
-                max=300,
-                message="De gebruikersdata mag maximaal 300 tekens bevatten.",
+                max=3000,
+                message="De gebruikersdata mag maximaal 3000 tekens bevatten.",
             ),
         ],
         render_kw={
@@ -60,7 +60,7 @@ class IAMProvisioningForm(FlaskForm):
         },
     )
 
-    submit = not SubmitField(
+    submit = SubmitField(
         "Start IAM synchronisatie",
     )
 
