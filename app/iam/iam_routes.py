@@ -11,10 +11,14 @@ from app.extensions.db import db
 from app.iam import iam_blueprint
 from app.iam.iam_forms import IAMProvisioningForm
 from app.models.user import User
+# Logging
+from services.services import UserLog
+
 
 @iam_blueprint.route("/", methods=["GET", "POST"])
 @login_required
 def iam_index() -> Response | str:
+    UserLog.log_action(current_user, "IAM pagina bezocht")
     """
     Toon de startpagina van de IAM-module.
 

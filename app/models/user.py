@@ -9,6 +9,7 @@ from datetime import datetime, UTC
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
+# roles check
     VALID_ROLES = {"user", "admin"}
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
