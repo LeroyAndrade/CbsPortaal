@@ -35,26 +35,12 @@ class IAMProvisioningService:
 
     @classmethod
     def provision(cls, source_data: str) -> dict[str, int]:
-        """
-        Verwerk JSON met één gebruiker of meerdere gebruikers.
-
-        Voorbeeld van één gebruiker:
-
-        {
-            "username": "testuser",
-            "email": "testuser@example.nl",
-            "password": "SterkWachtwoord123!",
-            "role": "user"
-        }
-
-        Een lijst met meerdere gebruikers wordt ook ondersteund.
-        """
 
 #000  JSON verwerken
         users_data = cls._parse_source_data(source_data)
 
 
-# 010 Teller voor rapportage`
+# 010 Teller voor rapportage
         created_count = 0
         updated_count = 0
 

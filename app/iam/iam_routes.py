@@ -86,6 +86,8 @@ def iam_index() -> Response | str:
 
     return render_template(
         "iam/iam_index.html",
+        current=current_user,
+        current_user=current_user.username,
         users=users,
         form=form,
     )
