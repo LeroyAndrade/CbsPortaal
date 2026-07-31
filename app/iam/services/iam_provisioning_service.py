@@ -3,10 +3,13 @@
 import json
 from typing import Any
 
+from flask_login import current_user
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 from app.extensions.db import db
 from app.models.user import User
+from app.services.services import UserLog
+
 
 class IAMProvisioningError(Exception):
     """
@@ -64,6 +67,7 @@ class IAMProvisioningService:
 
 #004 Nieuwe gebruiker of bestaande gebruiker bijwerken
                 if existing_user is None:
+                    UserLog.log_action(current_user, f"heeft {user_data['username']} aangemaakt")
                     cls._create_user(
                         user_data=user_data,
                         position=position,
@@ -72,6 +76,7 @@ class IAMProvisioningService:
                     created_count += 1
 
                 else:
+                    UserLog.log_action(current_user, f"heeft {user_data['username']} bijgewerkt")
                     cls._update_user(
                         user=existing_user,
                         user_data=user_data,
@@ -94,15 +99,16 @@ class IAMProvisioningService:
 #005
             db.session.commit()
 
-        except IAMProvisioningError:
+        except IAMProvisioningError as error:
             db.session.rollback()
+            UserLog.log_action(current_user, f"heeft een rollback veroozaakt na gefaalde wijziging "+ f'{error}')
             raise
 
         except IntegrityError as error:
             db.session.rollback()
 
             raise IAMProvisioningError(
-                "Een gebruikersnaam of e-mailadres is al in gebruik."
+                "Een gebruikersnaam of e-mailadres is al in gebruik." + f'{error}'
             ) from error
 
         except SQLAlchemyError as error:
